@@ -5,12 +5,12 @@ const nextConfig = {
   rewrites: async () => {
     return [
       {
-        source: '/api/items',
-        destination: 'http://localhost:8000/users',
+        source: '/api/user',
+        destination: 'http://localhost:8000/user',
       },
       {
-        source: '/api/items/:slug',
-        destination: 'http://localhost:8000/users/:slug',
+        source: '/api/user/:slug',
+        destination: 'http://localhost:8000/user/:slug',
       },
     ];
   },

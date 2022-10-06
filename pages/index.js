@@ -15,7 +15,7 @@ import Container from '@mui/material/Container';
 const pages = ['Baby', 'Diary', 'Weight', 'Calender', 'Q&A', 'Login'];
 const settings = ['Profile', 'Account', 'Logout'];
 
-const ResponsiveAppBar = () => {
+function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -190,5 +190,5 @@ const ResponsiveAppBar = () => {
       </Container>
     </React.Fragment>
   );
-};
+}
 export default ResponsiveAppBar;
