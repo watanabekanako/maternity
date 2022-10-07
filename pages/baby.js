@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import moment from 'moment';
 import useSWR from 'swr';
-
+import DefaultLayout from '../components/layout/DefaultLayout';
 // const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Baby = () => {
@@ -24,10 +24,13 @@ const Baby = () => {
 
   return (
     <React.Fragment>
-      <CssBaseline />
-      <Container maxWidth="sm">
-        <p>出産予定日まであと{diff}日</p>
-      </Container>
+      <DefaultLayout style={{ color: 'red' }}>
+        <React.Fragment>
+          <CssBaseline />
+
+          <p>出産予定日まであと{diff}日</p>
+        </React.Fragment>
+      </DefaultLayout>
     </React.Fragment>
   );
 };
