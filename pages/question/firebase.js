@@ -13,18 +13,12 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Container from '@mui/material/Container';
 import DefaultLayout from '../components/layout/DefaultLayout';
-// import Answer from './question/Answer';
+
 function ResponsiveAppBar() {
   return (
     <React.Fragment>
       <DefaultLayout style={{ color: 'red' }}>
-        <React.Fragment>
-          <h1>妊娠中サポートできるアプリ作成中</h1>
-          <p>
-            ログインした状態であれば、ここに出産までのカウントダウンが表示されるようにしたいです。
-          </p>
-          {/* <Answer /> */}
-        </React.Fragment>
+        <React.Fragment></React.Fragment>
       </DefaultLayout>
     </React.Fragment>
   );
