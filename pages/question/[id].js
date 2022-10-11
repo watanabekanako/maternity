@@ -1,26 +1,43 @@
 import { useRouter } from 'next/router';
-import {
-  getFirestore,
-  connectFirestoreEmulator,
-} from 'firebase/firestore';
+import { useCollectionData, useDocumentData } from "react-firebase-hooks/firestore";
+import { db } from "../../firebase";
+import { doc, collection, query, orderBy, where, documentId } from "firebase/firestore";
 
-// firebaseApps previously initialized using initializeApp()
-const db = getFirestore();
-connectFirestoreEmulator(db, 'localhost', 8080);
-export default function Question({ query }) {
-  console.log(query);
-  return <h1>{query}</h1>;
-}
+export default function Question() {
+  const router = useRouter();
+  const { id } = router.query;
 
-export async function getServerSideProps({ query }) {
-  const [snapshot, loading, error] = useCollectionOnce(
-    query,
-    options
+  // questionsコレクションの中にドキュメントID=1のデータがある想定
+  // /question/1にアクセスするとidに1がはいる
+
+  const [values, loading, error, snapshot] = useDocumentData(
+    // dbの中のquestionsコレクションの中のIDがidのドキュメントを取得
+    // 第3引数は必須だがidはすぐに設定されるわけではないので、ダミーの文字列を設定しておく
+    doc(db, "questions", id ?? "dummy")
   );
-  return {
-    props: { query },
-  };
+
+  // // 一覧画面等でquestionsコレクションの中の複数のドキュメントを取得するケース
+  // const [values, loading, error, snapshot] = useCollectionData(
+  //   query(
+  //     collection(db, "questions"),
+  //     // whereやorderByで検索条件や並び順を指定することも出来る(ID指定なら以下のような指定)
+  //     // ※条件を渡さないことも可能
+  //     where(documentId(), "==", "1"),
+  //   )
+  // );
+
+  if (loading) {
+    return <>loading...</>;
+  }
+
+  return (
+    <h1>
+      {/* values.xxxはfirestoreで登録したフィールド */}
+      {values.test}
+    </h1>
+  );
 }
+
 // import { useState } from 'react';
 // import DefaultLayout from '../../components/layout/DefaultLayout';
 // export async function getStaticProps({ params }) {
