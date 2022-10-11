@@ -1,6 +1,7 @@
 import * as React from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const User = () => {
   // メールアドレス正規表現チェック
@@ -42,6 +43,7 @@ const User = () => {
           margin="dense"
         />
       </div>
+      <Button variant="contained">登録</Button>
     </DefaultLayout>
   );
 };
