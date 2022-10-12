@@ -1,7 +1,17 @@
 import { useRouter } from 'next/router';
-import { useCollectionData, useDocumentData } from "react-firebase-hooks/firestore";
-import { db } from "../../firebase";
-import { doc, collection, query, orderBy, where, documentId } from "firebase/firestore";
+import {
+  useCollectionData,
+  useDocumentData,
+} from 'react-firebase-hooks/firestore';
+import { db } from '../../firebase';
+import {
+  doc,
+  collection,
+  query,
+  orderBy,
+  where,
+  documentId,
+} from 'firebase/firestore';
 
 export default function Question() {
   const router = useRouter();
@@ -13,7 +23,7 @@ export default function Question() {
   const [values, loading, error, snapshot] = useDocumentData(
     // dbの中のquestionsコレクションの中のIDがidのドキュメントを取得
     // 第3引数は必須だがidはすぐに設定されるわけではないので、ダミーの文字列を設定しておく
-    doc(db, "questions", id ?? "dummy")
+    doc(db, 'questions', id ?? 'dummy')
   );
 
   // // 一覧画面等でquestionsコレクションの中の複数のドキュメントを取得するケース
@@ -33,7 +43,8 @@ export default function Question() {
   return (
     <h1>
       {/* values.xxxはfirestoreで登録したフィールド */}
-      {values.test}
+      {/* {values.test} */}
+      {values.id}
     </h1>
   );
 }
