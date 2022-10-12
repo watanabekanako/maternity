@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "mock-api": "json-server --watch data/db.json --port 8000"
+    "mock-api": "json-server --watch data/db.json --port 8000",
+    "emulators:start": "cd firebase && firebase emulators:start --import=./data/ --export-on-exit=./data/"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",

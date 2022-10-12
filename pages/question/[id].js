@@ -35,7 +35,7 @@ export default function Question() {
   //     where(documentId(), "==", "1"),
   //   )
   // );
-
+  console.log(values);
   if (loading) {
     return <>loading...</>;
   }
@@ -44,11 +44,10 @@ export default function Question() {
     <h1>
       {/* values.xxxはfirestoreで登録したフィールド */}
       {/* {values.test} */}
-      {values.id}
+      {values.title}
     </h1>
   );
 }
-
 // import { useState } from 'react';
 // import DefaultLayout from '../../components/layout/DefaultLayout';
 // export async function getStaticProps({ params }) {
