@@ -12,6 +12,7 @@ import {
   where,
   documentId,
 } from 'firebase/firestore';
+import DefaultLayout from '../../components/layout/DefaultLayout';
 
 export default function Question() {
   const router = useRouter();
@@ -41,11 +42,14 @@ export default function Question() {
   }
 
   return (
-    <h1>
-      {/* values.xxxはfirestoreで登録したフィールド */}
-      {/* {values.test} */}
-      {values.title}
-    </h1>
+    <DefaultLayout>
+      <h1>
+        {/* values.xxxはfirestoreで登録したフィールド */}
+        {/* {values.test} */}
+        {values.title}
+      </h1>
+      <h2>質問詳細画面</h2>
+    </DefaultLayout>
   );
 }
 // import { useState } from 'react';
