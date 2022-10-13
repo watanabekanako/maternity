@@ -30,9 +30,13 @@ function QuestionList() {
     query(collection(db, 'questions'))
   );
   // console.log(values[0].query);
+  if (loading) {
+    return <>loading...</>;
+  }
   return (
     <ul>
       {values.map((question, index) => {
+        console.log(index);
         return (
           <>
             <Paper elevation={3}>
