@@ -26,19 +26,18 @@ function QuestionList() {
 
   // if (!data) return <div>loading...</div>;
 
-  const [values, loading, error, snapshot] = useDocumentData(
-    // dbの中のquestionsコレクションの中のIDがidのドキュメントを取得
-    // 第3引数は必須だがidはすぐに設定されるわけではないので、ダミーの文字列を設定しておく
-    doc(db, 'questions', id ?? 'dummy')
+  const [values, loading, error, snapshot] = useCollectionData(
+    query(collection(db, 'questions'))
   );
+  // console.log(values[0].query);
   return (
     <ul>
-      {data.map((question, index) => {
+      {values.map((question, index) => {
         return (
           <>
             <Paper elevation={3}>
               <li key={index}>
-                <li>{question.title}</li>
+                <li>{question.query}</li>
                 <Link href={`question/${question.id}`}>
                   <a>詳しくはこちら</a>
                 </Link>
