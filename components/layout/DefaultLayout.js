@@ -12,7 +12,16 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Container from '@mui/material/Container';
-const pages = ['Baby', 'Diary', 'Weight', 'Calender', 'Q&A', 'Login'];
+import Link from 'next/link';
+import MuiLink from '@mui/material/Link';
+const pages = [
+  { label: 'Baby', href: '/baby' },
+  { label: 'Diary', href: '/diary' },
+  { label: 'Weight', href: '/weight' },
+  { label: 'Calender', href: '/calender' },
+  { label: 'Q&A', href: '/question' },
+  { label: 'Login', href: '/login' },
+];
 const settings = ['Profile', 'Account', 'Logout'];
 
 function DefaultLayout({ children, style }) {
@@ -95,9 +104,16 @@ function DefaultLayout({ children, style }) {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
+                  <Link key={page.label} href={page.href} passHref>
+                    <MenuItem
+                      key={page.label}
+                      onClick={handleCloseNavMenu}
+                    >
+                      <Typography textAlign="center">
+                        {page.label}
+                      </Typography>
+                    </MenuItem>
+                  </Link>
                 ))}
               </Menu>
             </Box>
@@ -129,13 +145,15 @@ function DefaultLayout({ children, style }) {
               }}
             >
               {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  {page}
-                </Button>
+                <Link key={page.label} href={page.href} passHref>
+                  <Button
+                    key={page.label}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    {page.label}
+                  </Button>
+                </Link>
               ))}
             </Box>
 
