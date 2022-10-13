@@ -26,9 +26,25 @@ function QuestionList() {
 
   // if (!data) return <div>loading...</div>;
 
+  // const [values, loading, error, snapshot] = useCollectionData(
+  //   query(collection(db, 'questions'))
+  // );
+  // console.log(snapshot);
   const [values, loading, error, snapshot] = useCollectionData(
-    query(collection(db, 'questions'))
+    collection(db, 'questions').withConverter({
+      // toFirestore: (question) => {
+      //   return question;
+      // },
+      fromFirestore: (snapshot, options) => {
+        const data = snapshot.data(options);
+        return {
+          id: snapshot.id,
+          ...data,
+        };
+      },
+    })
   );
+
   // console.log(values[0].query);
   if (loading) {
     return <>loading...</>;
@@ -36,7 +52,7 @@ function QuestionList() {
   return (
     <ul>
       {values.map((question, index) => {
-        console.log(index);
+        // console.log(values);
         return (
           <>
             <Paper elevation={3}>

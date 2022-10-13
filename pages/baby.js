@@ -29,18 +29,23 @@ const Baby = () => {
   // if (!data) {
   //   return <>loading ...</>;
   // }
-  const [values, loading, error, snapshot] = useCollectionData(
-    query(collection(db, 'user'))
+  const id = '1';
+  const [values, loading, error, snapshot] = useDocumentData(
+    // dbの中のquestionsコレクションの中のIDがidのドキュメントを取得
+    // 第3引数は必須だがidはすぐに設定されるわけではないので、ダミーの文字列を設定しておく
+    doc(db, 'user', id ?? 'dummy')
   );
+
   // console.log(values[0].query);
   if (loading) {
     return <>loading...</>;
   }
+  // console.log(moment.unix(values.birthDate.seconds));
   // console.log(data);
   // const moment = require('moment');
-  const m1 = moment(values.birthData);
+  const m1 = moment.unix(values.birthDate.seconds);
 
-  const m2 = moment(moment().format('YYYY-MM-DD'));
+  const m2 = moment();
   const diff = m1.diff(m2, 'days');
 
   return (
