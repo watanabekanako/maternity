@@ -1,18 +1,22 @@
 import Link from 'next/link';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import { doc, setDoc } from 'firebase/firestore';
-
-export default async function WeightEdit({ weight }) {
+import {
+  useDocumentData,
+} from 'react-firebase-hooks/firestore';
+export default function WeightEdit({ weight }): Promise<number> {
   const [values, loading, error, snapshot] = useDocumentData(
     doc(db, 'user', weight ?? 'dummy')
   );
-  await setDoc(doc(db, 'users', 'weight'), {});
+  // await setDoc(doc(db, 'users', 'weight'), {});
   if (loading) {
     return <>loading...</>;
   }
   //   console.log(doc);
   console.log(values);
-  const onClickCreate = () => {};
+ function async onClickCreate = () => {
+  await setDoc(doc(db, 'users', 'weight'), {});
+ };
   return (
     <DefaultLayout>
       <div>
