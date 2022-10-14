@@ -13,12 +13,12 @@ export default function WeightEdit({ weight }){
   if (loading) {
     return <>loading...</>;
   }
-  //   console.log(doc);
   
   const onClickCreate = async () => {
     await setDoc(doc(db, 'user', 'weight'), {});
   };
-  console.log(db);
+  // console.log(db);
+  // console.log(values);
   return (
     <DefaultLayout>
       <div>
@@ -34,7 +34,7 @@ export default function WeightEdit({ weight }){
             <th>体重</th>
             <td>
               <input type="text" name="weight">
-                {/* {values.weight} */}
+                {/* {db} */}
               </input>
             </td>
           </tr>
