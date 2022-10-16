@@ -5,20 +5,21 @@ import {
   useDocumentData,
 } from 'react-firebase-hooks/firestore';
 import { db } from '../../firebase';
-export default function WeightEdit({ weight }){
-  const [values, loading, error, snapshot] = useDocumentData(
-    doc(db, 'user', weight ?? 'dummy')
-  );
-  // await setDoc(doc(db, 'users', 'weight'), {});
-  if (loading) {
-    return <>loading...</>;
-  }
+import React, { useState } from 'react';
+import moment from 'moment';
+export default function WeightEdit({  }){
+  const [weight,setWeight]=useState()
+  
   
   const onClickCreate = async () => {
-    await setDoc(doc(db, 'user', 'weight'), {});
+    await setDoc(
+      doc(db, 'user', '1',"weight",moment().format("YYYYMMDD")),
+       {weight:weight});
   };
-  // console.log(db);
+  console.log(db);
   // console.log(values);
+
+  console.log(weight);
   return (
     <DefaultLayout>
       <div>
@@ -33,9 +34,8 @@ export default function WeightEdit({ weight }){
           <tr>
             <th>体重</th>
             <td>
-              <input type="text" name="weight">
-                {/* {db} */}
-              </input>
+              <input type="text" name="weight" value={weight} onChange={(e)=>{setWeight(Number(e.target.value));}}/>
+                
             </td>
           </tr>
         </table>
