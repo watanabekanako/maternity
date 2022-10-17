@@ -21,7 +21,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 const Graph: React.FC = () => {
   const options = {
     responsive: true,
@@ -54,7 +54,17 @@ const Graph: React.FC = () => {
       },
     ],
   };
-
+  const [values, loading, error, snapshot] = useCollectionData(
+    collection(db, 'weight').withConverter({
+      fromFirestore: (snapshot, options) => {
+        const data = snapshot.data(options);
+        return {
+          id: snapshot.id,
+          ...data,
+        };
+      },
+    })
+  );
   return (
     <DefaultLayout>
       <Line options={options} data={data} />
