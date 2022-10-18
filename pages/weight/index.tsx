@@ -15,6 +15,7 @@ import { db, withIDConverter } from "../../firebase";
 import {useCollectionData, useDocumentData} from 'react-firebase-hooks/firestore';
 import {collection, documentId, onSnapshot, orderBy, query, where} from "@firebase/firestore";
 import {doc} from "firebase/firestore";
+import moment from 'moment';
 
 ChartJS.register(
     CategoryScale,
@@ -35,28 +36,6 @@ const Graph: React.FC = () => {
         text: '妊娠中の体重管理',
       },
     },
-  };
-
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-  ];
-
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: '体重',
-        data: [10, 40, 30, 40, 50, 80, 120],
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      },
-    ],
   };
 
   // const q = query(
@@ -86,19 +65,44 @@ const Graph: React.FC = () => {
           orderBy(documentId(), "asc"),
       ).withConverter(withIDConverter)
   );
+  console.log(values);
 
+  if (loading) {
+    return <>Loading...</>;
+  }
 
-  // const [values, loading, error, snapshot] = useCollectionData(
-  //   collection(db, "user", "1", 'weight').withConverter({
-  //     fromFirestore: (snapshot, options) => {
-  //       const data = snapshot.data(options);
-  //       return {
-  //         id: snapshot.id,
-  //         ...data,
-  //       };
-  //     },
-  //   })
-  // );
+  // 2022/10/1
+  const first = moment().startOf("month");
+  // 2022/10/31
+  const end = moment().endOf("month");
+  // 上記の差 = 30
+  const diff = end.diff(first, "days");
+
+  // [20221001, 20221002, ...., 20221031]を作りたい
+
+  const labels = new Array(diff + 1)
+      // [undefined, undefined, ...., undefined]
+      .fill(undefined)
+      .map((_val, idx) => {
+        return moment(first).add(idx, "days").format("YYYYMMDD");
+      });
+
+  const weightList = labels.map((date) => {
+    return values?.find((value) => value.id === date)?.weight;
+  });
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: '体重',
+        data: weightList,
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+    ],
+  };
+
   return (
     <DefaultLayout style={{}}>
       <Line options={options} data={data} />
