@@ -11,17 +11,21 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { db, withIDConverter } from "../../firebase";
+import {useCollectionData, useDocumentData} from 'react-firebase-hooks/firestore';
+import {collection, documentId, onSnapshot, orderBy, query, where} from "@firebase/firestore";
+import {doc} from "firebase/firestore";
 
 ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
 );
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+
 const Graph: React.FC = () => {
   const options = {
     responsive: true,
@@ -54,19 +58,49 @@ const Graph: React.FC = () => {
       },
     ],
   };
+
+  // const q = query(
+  //     collection(db, "user", "1", "weight"),
+  //     where(documentId(), ">=", "20221001"),
+  //     where(documentId(), "<=", "20221031"),
+  //     orderBy(documentId(), "asc"),
+  // );
+  // firebase純正でやった場合の処理
+  // const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  //   // こうしたいがforEachしか出来ない
+  //   // const weightList = querySnapshot.map((doc) => {
+  //   //   return doc.weight;
+  //   // });
+  //   // setWeightList(weightList);
+  //   querySnapshot.forEach((doc) => {
+  //     console.log(doc.data());
+  //   });
+  // });
+
+  // react-firebase-hooksの処理
   const [values, loading, error, snapshot] = useCollectionData(
-    collection(db, 'weight').withConverter({
-      fromFirestore: (snapshot, options) => {
-        const data = snapshot.data(options);
-        return {
-          id: snapshot.id,
-          ...data,
-        };
-      },
-    })
+      query(
+          collection(db, "user", "1", "weight"),
+          where(documentId(), ">=", "20221001"),
+          where(documentId(), "<=", "20221031"),
+          orderBy(documentId(), "asc"),
+      ).withConverter(withIDConverter)
   );
+
+
+  // const [values, loading, error, snapshot] = useCollectionData(
+  //   collection(db, "user", "1", 'weight').withConverter({
+  //     fromFirestore: (snapshot, options) => {
+  //       const data = snapshot.data(options);
+  //       return {
+  //         id: snapshot.id,
+  //         ...data,
+  //       };
+  //     },
+  //   })
+  // );
   return (
-    <DefaultLayout>
+    <DefaultLayout style={{}}>
       <Line options={options} data={data} />
     </DefaultLayout>
   );
