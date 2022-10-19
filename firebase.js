@@ -26,3 +26,17 @@ export const db = getFirestore(app);
 if (typeof window !== 'undefined') {
   connectFirestoreEmulator(db, 'localhost', 8080);
 }
+
+// firestoreからID込みでデータを取得するためのconverter
+export const withIDConverter = {
+  toFirestore(data) {
+    return data
+  },
+  fromFirestore(snapshot, options) {
+    const data = snapshot.data(options);
+    return {
+      ...data,
+      id: snapshot.id,
+    }
+  }
+};

@@ -7,7 +7,7 @@ import {
   useCollectionData,
   useDocumentData,
 } from 'react-firebase-hooks/firestore';
-import { db } from '../firebase';
+import { db, withIDConverter } from '../firebase';
 import {
   doc,
   collection,
@@ -31,18 +31,7 @@ function QuestionList() {
   // );
   // console.log(snapshot);
   const [values, loading, error, snapshot] = useCollectionData(
-    collection(db, 'questions').withConverter({
-      // toFirestore: (question) => {
-      //   return question;
-      // },
-      fromFirestore: (snapshot, options) => {
-        const data = snapshot.data(options);
-        return {
-          id: snapshot.id,
-          ...data,
-        };
-      },
-    })
+    collection(db, 'questions').withConverter(withIDConverter)
   );
 
   // console.log(values[0].query);
