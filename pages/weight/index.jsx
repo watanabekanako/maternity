@@ -1,5 +1,7 @@
 import React from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
+import Button from '@mui/material/Button';
+import Link from 'next/link';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -37,7 +39,7 @@ ChartJS.register(
   Legend
 );
 
-const Graph: React.FC = () => {
+const Graph = () => {
   const options = {
     responsive: true,
     plugins: {
@@ -119,9 +121,16 @@ const Graph: React.FC = () => {
   };
 
   return (
-    <DefaultLayout style={{}}>
-      <Line options={options} data={data} />
-    </DefaultLayout>
+    <>
+      <DefaultLayout style={{}}>
+        <Line options={options} data={data} />
+        <Button variant="contained" disabled>
+          <Link href="../weight/edit.jsx" passHref>
+            <a>詳しくはこちら</a>
+          </Link>
+        </Button>
+      </DefaultLayout>
+    </>
   );
 };
 
