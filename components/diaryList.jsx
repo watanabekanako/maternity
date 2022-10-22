@@ -7,7 +7,7 @@ import {
   useCollectionData,
   useDocumentData,
 } from 'react-firebase-hooks/firestore';
-import { db } from '../firebase';
+import { db, withIDConverter } from '../firebase';
 import {
   doc,
   collection,
@@ -17,21 +17,23 @@ import {
   documentId,
 } from 'firebase/firestore';
 function DiaryList() {
+  // const fetcher = (url) => fetch(url).then((res) => res.json());
+  // const { data, error } = useSWR(
+  //   'http://localhost:8000/question',
+  //   fetcher
+  // );
+  // if (error) return <div>failed to load</div>;
+
+  // if (!data) return <div>loading...</div>;
+
+  // const [values, loading, error, snapshot] = useCollectionData(
+  //   query(collection(db, 'questions'))
+  // );
   // console.log(snapshot);
   const [values, loading, error, snapshot] = useCollectionData(
-    collection(db, 'questions').withConverter({
-      // toFirestore: (question) => {
-      //   return question;
-      // },
-      fromFirestore: (snapshot, options) => {
-        const data = snapshot.data(options);
-        return {
-          id: snapshot.id,
-          ...data,
-        };
-      },
-    })
+    collection(db, 'questions').withConverter(withIDConverter)
   );
+
   // console.log(values[0].query);
   if (loading) {
     return <>loading...</>;

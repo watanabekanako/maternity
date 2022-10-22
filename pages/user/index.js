@@ -25,8 +25,11 @@ const User = () => {
     setFormErrors(validate(formValues));
     // バリデーションチェック
   };
+
   const validate = (values) => {
     const errors = {};
+    const regex = new RegExp('正規表現');
+    regex.test(values.mailAddress); // true or false
     if (!values.username) {
       errors.username = '名前を入力してください';
     }
