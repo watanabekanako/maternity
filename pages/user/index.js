@@ -9,6 +9,7 @@ const User = () => {
     username: '',
     mailAddress: '',
     password: '',
+    birthDate: "",
   };
   const [formValues, setFormvalues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -28,17 +29,23 @@ const User = () => {
 
   const validate = (values) => {
     const errors = {};
-    const regex = new RegExp('正規表現');
-    regex.test(values.mailAddress); // true or false
     if (!values.username) {
       errors.username = '名前を入力してください';
     }
+
+    // メールアドレスの検証
+    const regex = new RegExp(/^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/);
     if (!values.mailAddress) {
       errors.mailAddress = 'メールアドレスを入力してください';
+    } else if (!regex.test(values.mailAddress)) {
+      errors.mailAddress = 'メールアドレスのフォーマットが不正です';
     }
     if (!values.password) {
       errors.password = 'パスワードを入力してください';
+    } else if (values.password.length < 8) {
+      errors.password = "パスワードは8文字以上で入力して下さい"
     }
+    return errors;
   };
 
   // const [name, setName] = useState('');
@@ -56,44 +63,79 @@ const User = () => {
       <form>
         <div>
           <TextField
+            error={formErrors.username}
+            helperText={formErrors.username}
             id="outlined-basic"
             label="名前"
             variant="outlined"
             margin="dense"
             name="username"
-            onChange={(e) => handleChange(e)}
+            value={formValues.username}
+            onChange={(e) => {
+              setFormvalues({
+                ...formValues,
+                username: e.target.value,
+              });
+            }}
           />
         </div>
         <div>
           <TextField
+            error={formErrors.mailAddress}
+            helperText={formErrors.mailAddress}
             id="outlined-basic email"
             label="Email"
             variant="outlined"
             margin="dense"
             name="mailAddress"
+            value={formValues.mailAddress}
+            onChange={(e) => {
+              setFormvalues({
+                ...formValues,
+                mailAddress: e.target.value,
+              })
+            }}
           />
         </div>
         <div>
           <TextField
+            error={formErrors.password}
+            helperText={formErrors.password}
             id="outlined-basic"
             label="パスワード"
             variant="outlined"
             margin="dense"
             name="password"
+            value={formValues.password}
+            onChange={(e) => {
+              setFormvalues({
+                ...formValues,
+                password: e.target.value,
+              });
+            }}
           />
         </div>
         <div>
           <TextField
+            error={formErrors.birthDate}
+            helperText={formErrors.birthDate}
             id="outlined-basic"
             label="出産予定日"
             variant="outlined"
             margin="dense"
+            value={formValues.birthDate}
+            onChange={(e) => {
+              setFormvalues({
+                ...formValues,
+                birthDate: e.target.value,
+              })
+            }}
           />
         </div>
+        <Button type="submit" variant="contained" onClick={handleSubmit}>
+          登録
+        </Button>
       </form>
-      <Button variant="contained" onClick={(e) => handleSubmit(e)}>
-        登録
-      </Button>
     </DefaultLayout>
   );
 };
