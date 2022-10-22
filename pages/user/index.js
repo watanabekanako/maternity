@@ -3,8 +3,14 @@ import DefaultLayout from '../../components/layout/DefaultLayout';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
+import {useCreateUserWithEmailAndPassword} from "react-firebase-hooks/auth";
+import {auth, db} from "../../firebase";
+import {useRouter} from "next/router";
+import {doc, setDoc} from "firebase/firestore";
+import moment from "moment";
 
 const User = () => {
+  const router = useRouter();
   const initialValues = {
     username: '',
     mailAddress: '',
@@ -13,6 +19,12 @@ const User = () => {
   };
   const [formValues, setFormvalues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
+  const [
+    createUserWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useCreateUserWithEmailAndPassword(auth);
   const handleChange = (e) => {
     // console.log(e.target.value);
 
@@ -21,10 +33,35 @@ const User = () => {
     console.log(formValues);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
     // バリデーションチェック
+    const errors = validate(formValues);
+    if (Object.keys(errors).length > 0) {
+      // エラーがあればformErrorsにセット
+      setFormErrors(errors);
+    } else {
+      // 無ければ登録処理
+
+      // authentication
+      await createUserWithEmailAndPassword(formValues.mailAddress, formValues.password);
+      if (user) {
+        // firestoreにユーザーのデータを保存
+        await setDoc(
+          doc(db, 'user', user.user.uid),
+          {
+            username: formValues.username,
+            birthDate: moment(formValues.birthDate, "YYYY/MM/DD").toDate(),
+          }
+        );
+        // 登録成功時の処理
+        // 登録が終わったらログイン画面に遷移する
+        router.push("/login");
+      } else if (error) {
+        // 登録失敗時の処理
+        console.log(error.message);
+      }
+    }
   };
 
   const validate = (values) => {
