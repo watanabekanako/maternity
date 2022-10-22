@@ -27,7 +27,7 @@ const Baby = () => {
   const [values, loading, error, snapshot] = useDocumentData(
     // dbの中のquestionsコレクションの中のIDがidのドキュメントを取得
     // 第3引数は必須だがidはすぐに設定されるわけではないので、ダミーの文字列を設定しておく
-    doc(db, 'user', user.uid ?? 'dummy')
+    doc(db, 'user', user?.uid ?? 'dummy')
   );
 
   // console.log(values[0].query);
