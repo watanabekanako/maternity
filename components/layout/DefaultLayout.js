@@ -14,6 +14,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import Container from '@mui/material/Container';
 import Link from 'next/link';
 import MuiLink from '@mui/material/Link';
+import {signOut} from "firebase/auth";
+import {auth} from "../../firebase";
 const pages = [
   { label: 'Baby', href: '/baby' },
   { label: 'Diary', href: '/diary' },
@@ -39,7 +41,12 @@ function DefaultLayout({ children, style }) {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting) => {
+    if (setting === "Logout") {
+      // ログアウト処理
+      signOut(auth);
+    }
+
     setAnchorElUser(null);
   };
 
@@ -188,7 +195,7 @@ function DefaultLayout({ children, style }) {
                 {settings.map((setting) => (
                   <MenuItem
                     key={setting}
-                    onClick={handleCloseUserMenu}
+                    onClick={() => handleCloseUserMenu(setting)}
                   >
                     <Typography textAlign="center">
                       {setting}
