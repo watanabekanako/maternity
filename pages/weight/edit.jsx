@@ -9,6 +9,7 @@ export default function WeightEdit({}) {
   const [weight, setWeight] = useState();
 
   const onClickCreate = async () => {
+    console.log(db);
     await setDoc(
       doc(db, 'user', '1', 'weight', moment().format('YYYYMMDD')),
       { weight: weight }
