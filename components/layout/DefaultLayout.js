@@ -14,8 +14,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import Container from '@mui/material/Container';
 import Link from 'next/link';
 import MuiLink from '@mui/material/Link';
-import {signOut} from "firebase/auth";
-import {auth} from "../../firebase";
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
 const pages = [
   { label: 'Baby', href: '/baby' },
   { label: 'Diary', href: '/diary' },
@@ -42,7 +42,7 @@ function DefaultLayout({ children, style }) {
   };
 
   const handleCloseUserMenu = (setting) => {
-    if (setting === "Logout") {
+    if (setting === 'Logout') {
       // ログアウト処理
       signOut(auth);
     }
@@ -55,9 +55,9 @@ function DefaultLayout({ children, style }) {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon
+            {/* <AdbIcon
               sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
-            />
+            /> */}
             <Typography
               variant="h6"
               noWrap
@@ -72,9 +72,7 @@ function DefaultLayout({ children, style }) {
                 color: 'inherit',
                 textDecoration: 'none',
               }}
-            >
-              LOGO
-            </Typography>
+            ></Typography>
 
             <Box
               sx={{

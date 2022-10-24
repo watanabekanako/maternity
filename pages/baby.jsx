@@ -4,12 +4,13 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import moment from 'moment';
 import useSWR from 'swr';
+import Image from 'next/image';
 import DefaultLayout from '../components/layout/DefaultLayout';
 import {
   useCollectionData,
   useDocumentData,
 } from 'react-firebase-hooks/firestore';
-import {auth, db} from '../firebase';
+import { auth, db } from '../firebase';
 import {
   doc,
   collection,
@@ -18,7 +19,7 @@ import {
   where,
   documentId,
 } from 'firebase/firestore';
-import {useAuthState} from "react-firebase-hooks/auth";
+import { useAuthState } from 'react-firebase-hooks/auth';
 // const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Baby = () => {
@@ -47,6 +48,7 @@ const Baby = () => {
       <DefaultLayout style={{ color: 'red' }}>
         <React.Fragment>
           <CssBaseline />
+          <Image src="/img/baby.jpg" width={500} height={500} />
           <p>出産予定日まであと{diff}日</p>
         </React.Fragment>
       </DefaultLayout>
