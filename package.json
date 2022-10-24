@@ -11,10 +11,14 @@
     "emulators:start": "cd firebase && firebase emulators:start --import=./data/ --export-on-exit=./data/"
   },
   "dependencies": {
+    "@emotion/cache": "^11.10.3",
     "@emotion/react": "^11.10.4",
+    "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.8",
+    "@mui/styles": "^5.10.10",
+    "@mui/x-date-pickers": "^5.0.5",
     "firebase": "^9.10.0",
     "moment": "^2.29.4",
     "next": "12.3.1",

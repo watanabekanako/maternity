@@ -1,8 +1,16 @@
+import '../styles/globals.css';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import { useRouter } from 'next/router';
-import '../styles/globals.css';
+import { ThemeProvider } from '@mui/styles';
+import theme from '../theme';
+import { CacheProvider } from '@emotion/react';
+import createEmotionCache from '../createEmotionCache';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+
+const clientSideEmotionCache = createEmotionCache();
 // ログイン状態を確認して、未ログインならログイン画面に飛ばす
 const NeedLogin = ({ children }) => {
   const router = useRouter();
@@ -32,13 +40,28 @@ const NeedLogin = ({ children }) => {
   return <>{children}</>;
 };
 
-function MyApp({ Component, pageProps }) {
+function MyApp({
+  Component,
+  pageProps,
+  emotionCache = clientSideEmotionCache,
+}) {
   return (
     <>
-      <CssBaseline />
-      <NeedLogin>
-        <Component {...pageProps} />
-      </NeedLogin>
+      <LocalizationProvider
+        dateAdapter={AdapterMoment}
+        dateFormats={{
+          fullDateTime24h: 'YYYYMMDD HH:mm',
+        }}
+      >
+        <CacheProvider value={emotionCache}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <NeedLogin>
+              <Component {...pageProps} />
+            </NeedLogin>
+          </ThemeProvider>
+        </CacheProvider>
+      </LocalizationProvider>
     </>
   );
 }
