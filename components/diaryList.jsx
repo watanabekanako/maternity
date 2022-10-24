@@ -7,7 +7,7 @@ import {
   useCollectionData,
   useDocumentData,
 } from 'react-firebase-hooks/firestore';
-import { db, withIDConverter } from '../firebase';
+import { auth, db, withIDConverter } from '../firebase';
 import {
   doc,
   collection,
@@ -16,37 +16,27 @@ import {
   where,
   documentId,
 } from 'firebase/firestore';
+import { useAuthState } from 'react-firebase-hooks/auth';
 function DiaryList() {
-  // const fetcher = (url) => fetch(url).then((res) => res.json());
-  // const { data, error } = useSWR(
-  //   'http://localhost:8000/question',
-  //   fetcher
-  // );
-  // if (error) return <div>failed to load</div>;
-
-  // if (!data) return <div>loading...</div>;
-
-  // const [values, loading, error, snapshot] = useCollectionData(
-  //   query(collection(db, 'questions'))
-  // );
-  // console.log(snapshot);
+  const [user, loadingUser, errorUser] = useAuthState(auth);
   const [values, loading, error, snapshot] = useCollectionData(
-    collection(db, 'questions').withConverter(withIDConverter)
+    query(
+      collection(db, 'user', user?.uid ?? 'dummy', 'diary')
+    ).withConverter(withIDConverter)
   );
-
   // console.log(values[0].query);
   if (loading) {
     return <>loading...</>;
   }
   return (
     <ul>
-      {values.map((question, index) => {
-        // console.log(values);
+      {values.map((diary, index) => {
+        // console.log(diary);
         return (
           <>
             <Paper elevation={3}>
               <li key={index}>
-                <li>{question.query}</li>
+                <li>{diary}</li>
                 <Link href={`question/${question.id}`}>
                   <a>詳しくはこちら</a>
                 </Link>

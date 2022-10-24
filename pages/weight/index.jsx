@@ -13,7 +13,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { db, withIDConverter } from '../../firebase';
+import { db, withIDConverter, auth } from '../../firebase';
 import {
   useCollectionData,
   useDocumentData,
@@ -70,9 +70,13 @@ const Graph = () => {
   // });
 
   // react-firebase-hooksの処理
+
+  // ログインしているユーザーの商法の取得
+  const [user, LoadingUser, ErrorUser] = useAuthState(auth);
   const [values, loading, error, snapshot] = useCollectionData(
     query(
-      collection(db, 'user', '1', 'weight'),
+      // collection(db, 'user', '1', 'weight'),
+      collection(db, 'user', user?.uid ?? 'dummy', 'weight'),
       where(documentId(), '>=', '20221001'),
       where(documentId(), '<=', '20221031'),
       orderBy(documentId(), 'asc')
@@ -126,7 +130,7 @@ const Graph = () => {
       <DefaultLayout style={{}}>
         <Line options={options} data={data} />
         <Button variant="contained" disabled>
-          <Link href="../weight/edit.jsx" passHref>
+          <Link href="/" passHref>
             <a>詳しくはこちら</a>
           </Link>
         </Button>
