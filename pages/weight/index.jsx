@@ -38,6 +38,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Graph = () => {
   const options = {
