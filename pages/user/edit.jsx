@@ -9,6 +9,7 @@ import {useRouter} from "next/router";
 import {doc, setDoc} from "firebase/firestore";
 import moment from "moment";
 import {useDocumentData} from "react-firebase-hooks/firestore";
+import {DatePicker} from "@mui/x-date-pickers";
 
 const Edit = () => {
   const [user, loadingUser, errorUser] = useAuthState(auth);
@@ -70,20 +71,21 @@ const Edit = () => {
       <h1>ユーザー情報編集</h1>
       <form>
         <div>
-          <TextField
+          <DatePicker
+            label="出産予定日"
             error={formErrors.birthDate}
             helperText={formErrors.birthDate}
             id="outlined-basic"
-            label="出産予定日"
             variant="outlined"
             margin="dense"
-            value={formValues.birthDate}
-            onChange={(e) => {
+            value={moment(formValues.birthDate)}
+            onChange={(newValue) => {
               setFormvalues({
                 ...formValues,
-                birthDate: e.target.value,
-              })
+                birthDate: newValue.format("YYYY/MM/DD"),
+              });
             }}
+            renderInput={(params) => <TextField {...params} />}
           />
         </div>
         <Button type="submit" variant="contained" onClick={handleSubmit}>
