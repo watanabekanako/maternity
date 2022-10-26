@@ -9,7 +9,7 @@ import {useRouter} from "next/router";
 import {doc, setDoc} from "firebase/firestore";
 import moment from "moment";
 
-const User = () => {
+const Register = () => {
   const router = useRouter();
   const initialValues = {
     username: '',
@@ -176,4 +176,4 @@ const User = () => {
     </DefaultLayout>
   );
 };
-export default User;
+export default Register;
