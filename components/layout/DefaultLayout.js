@@ -205,7 +205,7 @@ function DefaultLayout({ children, style }) {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container maxWidth="sm">{children}</Container>
+      <Container maxWidth="md">{children}</Container>
     </React.Fragment>
   );
 }

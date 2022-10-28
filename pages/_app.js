@@ -9,6 +9,7 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../createEmotionCache';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import Head from 'next/head';
 
 const clientSideEmotionCache = createEmotionCache();
 // ログイン状態を確認して、未ログインならログイン画面に飛ばす
@@ -47,6 +48,12 @@ function MyApp({
 }) {
   return (
     <>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css?family=M+PLUS+1p"
+          rel="stylesheet"
+        />
+      </Head>
       <LocalizationProvider
         dateAdapter={AdapterMoment}
         dateFormats={{

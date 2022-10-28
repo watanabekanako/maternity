@@ -62,7 +62,7 @@ const temperatureGraph = () => {
   const first = moment().startOf('month');
   const end = moment().endOf('month');
   const diff = end.diff(first, 'days');
-  const labels = newArray(diff + 1)
+  const labels = new Array(diff + 1)
     .fill(undefined)
     .map((_val, idx) => {
       return moment(first).add(idx, 'days').format('YYYYMMDD');

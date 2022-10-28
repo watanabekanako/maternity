@@ -3,11 +3,12 @@ import DefaultLayout from '../../components/layout/DefaultLayout';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
-import {useCreateUserWithEmailAndPassword} from "react-firebase-hooks/auth";
-import {auth, db} from "../../firebase";
-import {useRouter} from "next/router";
-import {doc, setDoc} from "firebase/firestore";
-import moment from "moment";
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { auth, db } from '../../firebase';
+import { useRouter } from 'next/router';
+import { doc, setDoc } from 'firebase/firestore';
+import moment from 'moment';
+import { DatePicker } from '@mui/x-date-pickers';
 
 const Register = () => {
   const router = useRouter();
@@ -15,16 +16,12 @@ const Register = () => {
     username: '',
     mailAddress: '',
     password: '',
-    birthDate: "",
+    birthDate: '',
   };
   const [formValues, setFormvalues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  const [
-    createUserWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useCreateUserWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
   const handleChange = (e) => {
     // console.log(e.target.value);
 
@@ -32,7 +29,7 @@ const Register = () => {
     setFormvalues({ ...formValues, [name]: value });
     console.log(formValues);
   };
-
+  console.log(handleSubmit);
   const handleSubmit = async (e) => {
     e.preventDefault();
     // バリデーションチェック
@@ -44,19 +41,22 @@ const Register = () => {
       // 無ければ登録処理
 
       // authentication
-      await createUserWithEmailAndPassword(formValues.mailAddress, formValues.password);
+      await createUserWithEmailAndPassword(
+        formValues.mailAddress,
+        formValues.password
+      );
       if (user) {
         // firestoreにユーザーのデータを保存
-        await setDoc(
-          doc(db, 'user', user.user.uid),
-          {
-            username: formValues.username,
-            birthDate: moment(formValues.birthDate, "YYYY/MM/DD").toDate(),
-          }
-        );
+        await setDoc(doc(db, 'user', user.user.uid), {
+          username: formValues.username,
+          birthDate: moment(
+            formValues.birthDate,
+            'YYYY/MM/DD'
+          ).toDate(),
+        });
         // 登録成功時の処理
         // 登録が終わったらログイン画面に遷移する
-        router.push("/login");
+        router.push('/login');
       } else if (error) {
         // 登録失敗時の処理
         console.log(error.message);
@@ -71,7 +71,9 @@ const Register = () => {
     }
 
     // メールアドレスの検証
-    const regex = new RegExp(/^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/);
+    const regex = new RegExp(
+      /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/
+    );
     if (!values.mailAddress) {
       errors.mailAddress = 'メールアドレスを入力してください';
     } else if (!regex.test(values.mailAddress)) {
@@ -80,7 +82,7 @@ const Register = () => {
     if (!values.password) {
       errors.password = 'パスワードを入力してください';
     } else if (values.password.length < 8) {
-      errors.password = "パスワードは8文字以上で入力して下さい"
+      errors.password = 'パスワードは8文字以上で入力して下さい';
     }
     return errors;
   };
@@ -130,7 +132,7 @@ const Register = () => {
               setFormvalues({
                 ...formValues,
                 mailAddress: e.target.value,
-              })
+              });
             }}
           />
         </div>
@@ -153,7 +155,7 @@ const Register = () => {
           />
         </div>
         <div>
-          <TextField
+          <DatePicker
             error={formErrors.birthDate}
             helperText={formErrors.birthDate}
             id="outlined-basic"
@@ -161,15 +163,28 @@ const Register = () => {
             variant="outlined"
             margin="dense"
             value={formValues.birthDate}
-            onChange={(e) => {
+            // onChange={(e) => {
+            //   setFormvalues({
+            //     ...formValues,
+            //     birthDate: e.target.value,
+            //   });
+            // }}
+            onChange={(newValues) => {
               setFormvalues({
                 ...formValues,
-                birthDate: e.target.value,
-              })
+                birthDate: newValues.format('YYYY/MM/DD'),
+              });
             }}
+            renderInput={(params) => <TextField {...params} />}
           />
         </div>
-        <Button type="submit" variant="contained" onClick={handleSubmit}>
+        <Button
+          type="submit"
+          variant="contained"
+          onClick={handleSubmit}
+          sx={'background-color:pink'}
+          size="large"
+        >
           登録
         </Button>
       </form>

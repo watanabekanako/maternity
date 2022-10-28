@@ -45,12 +45,12 @@ function QuestionList() {
         return (
           <>
             <Paper elevation={3}>
-              <li key={index}>
-                <li>{question.query}</li>
+              <div key={index}>
+                <div>{question.query}</div>
                 <Link href={`question/${question.id}`}>
                   <a>詳しくはこちら</a>
                 </Link>
-              </li>
+              </div>
             </Paper>
           </>
         );
