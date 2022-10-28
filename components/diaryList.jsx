@@ -17,7 +17,7 @@ import {
 } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 function DiaryList() {
-  // ログインした状態にて取得
+  // ログインした状態にて取得したい
   const [user, loadingUser, errorUser] = useAuthState(auth);
   // useCollectionDataにて複数のドキュメントを取得する
   const [values, loading, error, snapshot] = useCollectionData(
