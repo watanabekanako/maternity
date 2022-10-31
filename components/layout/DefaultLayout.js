@@ -20,11 +20,11 @@ const pages = [
   { label: 'Baby', href: '/baby' },
   { label: 'Diary', href: '/diary' },
   { label: 'Weight', href: '/weight' },
-  { label: 'Calender', href: '/calender' },
+  // { label: 'Calender', href: '/calender' },
   { label: 'Q&A', href: '/question' },
   { label: 'Login', href: '/login' },
 ];
-const settings = ['Profile', 'Account', 'Logout'];
+const settings = ['Account', 'Logout'];
 
 function DefaultLayout({ children, style }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

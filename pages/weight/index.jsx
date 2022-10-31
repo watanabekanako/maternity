@@ -39,15 +39,16 @@ ChartJS.register(
   Legend
 );
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Box } from '@mui/material';
 
 const Graph = () => {
   const options = {
     responsive: true,
     plugins: {
-      title: {
-        display: true,
-        text: '妊娠中の体重管理',
-      },
+      // title: {
+      //   display: true,
+      //   text: '妊娠中の体重管理',
+      // },
     },
   };
 
@@ -128,12 +129,15 @@ const Graph = () => {
   return (
     <>
       <DefaultLayout style={{}}>
-        <Line options={options} data={data} />
-        <Button variant="contained" disabled>
-          <Link href="/" passHref>
-            <a>詳しくはこちら</a>
-          </Link>
-        </Button>
+        <Box textAlign="center">
+          <h1>体重管理</h1>
+          <Line options={options} data={data} />
+          {/* <Button variant="contained" disabled> */}
+
+          <Button variant="contained" to="/">
+            入力する
+          </Button>
+        </Box>
       </DefaultLayout>
     </>
   );

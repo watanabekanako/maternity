@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import useSWR, { useSWRConfig } from 'swr';
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import {
   useCollectionData,
   useDocumentData,
 } from 'react-firebase-hooks/firestore';
 import { db, withIDConverter } from '../firebase';
+
 import {
   doc,
   collection,
@@ -44,12 +44,18 @@ function QuestionList() {
         // console.log(values);
         return (
           <>
-            <Paper elevation={3}>
+            <Paper elevation={3} sx={{ padding: 2 }}>
               <div key={index}>
-                <div>{question.query}</div>
                 <Link href={`question/${question.id}`}>
-                  <a>詳しくはこちら</a>
+                  <a>
+                    <div>{question.query}</div>
+                  </a>
                 </Link>
+                {/* <Box sx={{ backgroundColor: 'pink' }}>
+                  <Link href={`question/${question.id}`}>
+                    <a>詳しくはこちら</a>
+                  </Link>
+                </Box> */}
               </div>
             </Paper>
           </>

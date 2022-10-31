@@ -20,6 +20,7 @@ import {
   documentId,
 } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Box } from '@mui/system';
 // const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Baby = () => {
@@ -47,9 +48,12 @@ const Baby = () => {
     <React.Fragment>
       <DefaultLayout style={{ color: 'red' }}>
         <React.Fragment>
-          <CssBaseline />
-          <Image src="/img/baby.jpg" width={500} height={500} />
-          <p>出産予定日まであと{diff}日</p>
+          <Box textAlign="center">
+            <CssBaseline />
+            <Image src="/img/baby.jpg" width={500} height={500} />
+
+            <p>出産予定日まであと{diff}日</p>
+          </Box>
         </React.Fragment>
       </DefaultLayout>
     </React.Fragment>

@@ -21,7 +21,12 @@ function DiaryList() {
   const [user, loadingUser, errorUser] = useAuthState(auth);
   // useCollectionDataにて複数のドキュメントを取得する
   const [values, loading, error, snapshot] = useCollectionData(
-    collection(db, 'diary').withConverter(withIDConverter)
+    collection(
+      db,
+      'user',
+      user?.uid ?? 'dummy',
+      'diary'
+    ).withConverter(withIDConverter)
   );
   console.log(values);
   if (loading) {
@@ -33,9 +38,11 @@ function DiaryList() {
         {values.map((diary, index) => {
           return (
             <>
-              <div key={index}>
-                <div>{diary.diary}</div>
-              </div>
+              <Paper sx={{ padding: 2 }}>
+                <div key={index}>
+                  <div>{diary.id}</div>
+                </div>
+              </Paper>
             </>
           );
         })}
