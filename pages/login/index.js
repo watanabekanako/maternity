@@ -26,14 +26,14 @@ const Login = () => {
       formValues.mailAddress,
       formValues.password
     );
-    if (user) {
-      console.log(user);
-      // ログイン成功
-      router.push('/baby');
-    } else if (error) {
-      // エラーハンドリング
-    }
   };
+
+  React.useEffect(() => {
+    // ユーザーがある = ログインできた時の処理
+    if (user) {
+      router.push('/baby');
+    }
+  }, [user]);
 
   return (
     <DefaultLayout>
