@@ -3,14 +3,13 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import { useRouter } from 'next/router';
-import { ThemeProvider } from '@mui/styles';
 import theme from '../theme';
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../createEmotionCache';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import Head from 'next/head';
-
+import { ThemeProvider } from '@mui/material/styles';
 const clientSideEmotionCache = createEmotionCache();
 // ログイン状態を確認して、未ログインならログイン画面に飛ばす
 const NeedLogin = ({ children }) => {

@@ -96,6 +96,9 @@ const Register = () => {
   //   /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
 
   // const submit = () => {};
+
+  const [isRevealPassword, setIsRevealPassword] = useState(false);
+
   return (
     <DefaultLayout>
       <h1>ユーザー登録</h1>
@@ -146,6 +149,8 @@ const Register = () => {
             margin="dense"
             name="password"
             value={formValues.password}
+            // パスワードを目隠しする
+            type={isRevealPassword ? 'text' : 'password'}
             onChange={(e) => {
               setFormvalues({
                 ...formValues,

@@ -40,15 +40,17 @@ export default function Question() {
   if (loading) {
     return <>loading...</>;
   }
-
   return (
     <DefaultLayout>
-      <h1>
+      <p>
+        <h2>{values.query}</h2>
         {/* values.xxxはfirestoreで登録したフィールド */}
         {/* {values.test} */}
         {values.title}
-      </h1>
-      <h2>質問詳細画面</h2>
+      </p>
+      <Button variant="contained" to="/">
+        質問一覧へ戻る
+      </Button>
     </DefaultLayout>
   );
 }
