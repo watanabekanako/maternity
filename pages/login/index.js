@@ -45,6 +45,7 @@ const Login = () => {
             label="Email"
             variant="outlined"
             margin="dense"
+            sx={{ width: 600 }}
             value={formValues.mailAddress}
             onChange={(e) => {
               setFormValues({
@@ -60,6 +61,7 @@ const Login = () => {
             label="パスワード"
             variant="outlined"
             margin="dense"
+            sx={{ width: 600, margin: 10 }}
             type="password"
             value={formValues.password}
             onChange={(e) => {

@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { doc, setDoc } from 'firebase/firestore';
 import moment from 'moment';
 import { DatePicker } from '@mui/x-date-pickers';
+import { Box } from '@mui/material';
 
 const Register = () => {
   const router = useRouter();
@@ -101,98 +102,103 @@ const Register = () => {
 
   return (
     <DefaultLayout>
-      <h1>ユーザー登録</h1>
-      <form>
-        <div>
-          <TextField
-            error={formErrors.username}
-            helperText={formErrors.username}
-            id="outlined-basic"
-            label="名前"
-            variant="outlined"
-            margin="dense"
-            name="username"
-            value={formValues.username}
-            onChange={(e) => {
-              setFormvalues({
-                ...formValues,
-                username: e.target.value,
-              });
-            }}
-          />
-        </div>
-        <div>
-          <TextField
-            error={formErrors.mailAddress}
-            helperText={formErrors.mailAddress}
-            id="outlined-basic email"
-            label="Email"
-            variant="outlined"
-            margin="dense"
-            name="mailAddress"
-            value={formValues.mailAddress}
-            onChange={(e) => {
-              setFormvalues({
-                ...formValues,
-                mailAddress: e.target.value,
-              });
-            }}
-          />
-        </div>
-        <div>
-          <TextField
-            error={formErrors.password}
-            helperText={formErrors.password}
-            id="outlined-basic"
-            label="パスワード"
-            variant="outlined"
-            margin="dense"
-            name="password"
-            value={formValues.password}
-            // パスワードを目隠しする
-            type={isRevealPassword ? 'text' : 'password'}
-            onChange={(e) => {
-              setFormvalues({
-                ...formValues,
-                password: e.target.value,
-              });
-            }}
-          />
-        </div>
-        <div>
-          <DatePicker
-            error={formErrors.birthDate}
-            helperText={formErrors.birthDate}
-            id="outlined-basic"
-            label="出産予定日"
-            variant="outlined"
-            margin="dense"
-            value={formValues.birthDate}
-            // onChange={(e) => {
-            //   setFormvalues({
-            //     ...formValues,
-            //     birthDate: e.target.value,
-            //   });
-            // }}
-            onChange={(newValues) => {
-              setFormvalues({
-                ...formValues,
-                birthDate: newValues.format('YYYY/MM/DD'),
-              });
-            }}
-            renderInput={(params) => <TextField {...params} />}
-          />
-        </div>
-        <Button
-          type="submit"
-          variant="contained"
-          onClick={handleSubmit}
-          sx={'background-color:pink'}
-          size="large"
-        >
-          登録
-        </Button>
-      </form>
+      <Box textAlign="center">
+        <h1>ユーザー登録</h1>
+        <form>
+          <div>
+            <TextField
+              error={formErrors.username}
+              helperText={formErrors.username}
+              id="outlined-basic"
+              label="名前"
+              variant="outlined"
+              margin="dense"
+              name="username"
+              sx={{ width: 600, marginBottom: 5 }}
+              value={formValues.username}
+              onChange={(e) => {
+                setFormvalues({
+                  ...formValues,
+                  username: e.target.value,
+                });
+              }}
+            />
+          </div>
+          <div>
+            <TextField
+              error={formErrors.mailAddress}
+              helperText={formErrors.mailAddress}
+              id="outlined-basic email"
+              label="Email"
+              variant="outlined"
+              margin="dense"
+              name="mailAddress"
+              sx={{ width: 600, marginBottom: 5 }}
+              value={formValues.mailAddress}
+              onChange={(e) => {
+                setFormvalues({
+                  ...formValues,
+                  mailAddress: e.target.value,
+                });
+              }}
+            />
+          </div>
+          <div>
+            <TextField
+              error={formErrors.password}
+              helperText={formErrors.password}
+              id="outlined-basic"
+              label="パスワード"
+              variant="outlined"
+              margin="dense"
+              name="password"
+              sx={{ width: 600, marginBottom: 5 }}
+              value={formValues.password}
+              // パスワードを目隠しする
+              type={isRevealPassword ? 'text' : 'password'}
+              onChange={(e) => {
+                setFormvalues({
+                  ...formValues,
+                  password: e.target.value,
+                });
+              }}
+            />
+          </div>
+          <div>
+            <DatePicker
+              error={formErrors.birthDate}
+              helperText={formErrors.birthDate}
+              id="outlined-basic"
+              label="出産予定日"
+              sx={{ width: 600 }}
+              variant="outlined"
+              margin="dense"
+              value={formValues.birthDate}
+              // onChange={(e) => {
+              //   setFormvalues({
+              //     ...formValues,
+              //     birthDate: e.target.value,
+              //   });
+              // }}
+              onChange={(newValues) => {
+                setFormvalues({
+                  ...formValues,
+                  birthDate: newValues.format('YYYY/MM/DD'),
+                });
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </div>
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={handleSubmit}
+            size="large"
+          >
+            登録
+          </Button>
+        </form>
+      </Box>
     </DefaultLayout>
   );
 };

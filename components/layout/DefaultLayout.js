@@ -22,7 +22,7 @@ const pages = [
   { label: 'Weight', href: '/weight' },
   // { label: 'Calender', href: '/calender' },
   { label: 'Q&A', href: '/question' },
-  { label: 'Login', href: '/login' },
+  { label: '新規会員登録', href: '/register' },
 ];
 const settings = ['Account', 'Logout'];
 
@@ -72,7 +72,9 @@ function DefaultLayout({ children, style }) {
                 color: 'inherit',
                 textDecoration: 'none',
               }}
-            ></Typography>
+            >
+              っっっs
+            </Typography>
 
             <Box
               sx={{

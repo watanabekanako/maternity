@@ -34,13 +34,14 @@ function QuestionList() {
     collection(db, 'questions').withConverter(withIDConverter)
   );
 
-  // console.log(values[0].query);
+  console.log(values);
+  console.log(loading);
   if (loading) {
     return <>loading...</>;
   }
   return (
     <ul>
-      {values.map((question, index) => {
+      {values?.map((question, index) => {
         // console.log(values);
         return (
           <>
