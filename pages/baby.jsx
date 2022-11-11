@@ -21,6 +21,8 @@ import {
 } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Box } from '@mui/system';
+import { Typography } from '@mui/material';
+import { Boy } from '@mui/icons-material';
 // const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Baby = () => {
@@ -39,20 +41,25 @@ const Baby = () => {
   // console.log(moment.unix(values.birthDate.seconds));
   // console.log(data);
   // const moment = require('moment');
-  const m1 = moment.unix(values.birthDate.seconds);
+  const m1 = moment.unix(values?.birthDate.seconds);
 
   const m2 = moment();
   const diff = m1.diff(m2, 'days');
+  console.log(values);
 
   return (
     <React.Fragment>
       <DefaultLayout style={{ color: 'red' }}>
         <React.Fragment>
-          <Box textAlign="center">
-            <CssBaseline />
-            <Image src="/img/baby.jpg" width={500} height={500} />
-
-            <p>出産予定日まであと{diff}日</p>
+          <Box textAlign="center" margin={10}>
+            <Image src="/img/baby.png" width={500} height={500} />
+            <Typography variant="h4">
+              出産予定日まであと
+              <Box variant="h4" sx={{ color: '#e4af9b' }}>
+                {diff}
+              </Box>
+              日
+            </Typography>
           </Box>
         </React.Fragment>
       </DefaultLayout>

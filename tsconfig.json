@@ -19,7 +19,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/weight/index.js"
+    "pages/weight/index.js",
+    "pages/diary/edit.jsx"
   ],
   "exclude": ["node_modules"]
 }

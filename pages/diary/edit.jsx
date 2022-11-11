@@ -4,6 +4,8 @@ import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import React, { useState } from 'react';
 import moment from 'moment';
+import { TextField } from '@mui/material';
+import { Box } from '@mui/system';
 export default function Diary() {
   const [diary, setDiary] = useState();
 
@@ -19,33 +21,29 @@ export default function Diary() {
   console.log(diary);
   return (
     <DefaultLayout>
-      <div>
+      <Box textAlign="center">
         <h1>日記</h1>
-        <table>
-          <tr>
-            <th>日付</th>
-            <td>
-              <input type="text" name="data"></input>
-            </td>
-          </tr>
-          <tr>
-            <th>今日の日記</th>
-            <td>
-              <input
-                type="text"
-                name="diary"
-                value={diary}
-                onChange={(e) => {
-                  setDiary(e.target.value);
-                }}
-              />
-            </td>
-          </tr>
-        </table>
-        <Link href="../diary">
-          <button onClick={() => onClickCreate()}>保存</button>
-        </Link>
-      </div>
+
+        <p>日付</p>
+
+        <TextField type="text" name="data" />
+
+        <p>今日の日記</p>
+
+        <TextField
+          type="text"
+          name="diary"
+          value={diary}
+          onChange={(e) => {
+            s;
+          }}
+        />
+        <div>
+          <Link href="../diary">
+            <button onClick={() => onClickCreate()}>保存</button>
+          </Link>
+        </div>
+      </Box>
     </DefaultLayout>
   );
 }

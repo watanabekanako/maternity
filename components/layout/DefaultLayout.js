@@ -16,20 +16,26 @@ import Link from 'next/link';
 import MuiLink from '@mui/material/Link';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
-const pages = [
-  { label: 'Baby', href: '/baby' },
-  { label: 'Diary', href: '/diary' },
-  { label: 'Weight', href: '/weight' },
-  // { label: 'Calender', href: '/calender' },
-  { label: 'Q&A', href: '/question' },
-  { label: '新規会員登録', href: '/register' },
-];
-const settings = ['Account', 'Logout'];
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function DefaultLayout({ children, style }) {
+  const [user] = useAuthState(auth);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const pages = user
+    ? [
+        { label: 'Top', href: '/' },
+        { label: 'Baby', href: '/baby' },
+        { label: 'Diary', href: '/diary' },
+        { label: 'Weight', href: '/weight' },
+        { label: 'Q&A', href: '/question' },
+      ]
+    : [
+        { label: 'Top', href: '/' },
+        { label: 'Q&A', href: '/question' },
+        { label: '新規会員登録', href: '/register' },
+      ];
+  const settings = ['Account', 'Logout'];
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -73,7 +79,7 @@ function DefaultLayout({ children, style }) {
                 textDecoration: 'none',
               }}
             >
-              っっっs
+              mama＋
             </Typography>
 
             <Box

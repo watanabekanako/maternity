@@ -28,7 +28,6 @@ import {
 } from '@firebase/firestore';
 import { doc } from 'firebase/firestore';
 import moment from 'moment';
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -133,10 +132,11 @@ const Graph = () => {
           <h1>体重管理</h1>
           <Line options={options} data={data} />
           {/* <Button variant="contained" disabled> */}
-
-          <Button variant="contained" to="/">
-            入力する
-          </Button>
+          <Link href="weight/edit" passHref>
+            <Button variant="contained" to="/">
+              入力する
+            </Button>
+          </Link>
         </Box>
       </DefaultLayout>
     </>

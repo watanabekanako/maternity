@@ -5,7 +5,11 @@ import Button from '@mui/material/Button';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { Box } from '@mui/system';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 const Login = () => {
   const router = useRouter();
   const [formValues, setFormValues] = React.useState({});
@@ -27,6 +31,7 @@ const Login = () => {
       formValues.password
     );
   };
+  const [passwordType, setPasswordType] = useState('');
 
   React.useEffect(() => {
     // ユーザーがある = ログインできた時の処理
@@ -62,7 +67,7 @@ const Login = () => {
             variant="outlined"
             margin="dense"
             sx={{ width: 600, margin: 10 }}
-            type="password"
+            type="passwordType"
             value={formValues.password}
             onChange={(e) => {
               setFormValues({
@@ -71,6 +76,19 @@ const Login = () => {
               });
             }}
           />
+          {passwordType === 'password' && (
+            <VisibilityOffIcon
+              onClick={() => setPasswordType('text')}
+              className="Password__visual"
+            />
+          )}
+          {/* // 表示 */}
+          {passwordType === 'text' && (
+            <VisibilityIcon
+              onClick={() => setPasswordType('password')}
+              className="Password__visual"
+            />
+          )}
         </div>
         <Button variant="contained" onClick={handleLogin}>
           ログイン

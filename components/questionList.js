@@ -16,6 +16,7 @@ import {
   where,
   documentId,
 } from 'firebase/firestore';
+import { Button } from '@mui/material';
 function QuestionList() {
   // const fetcher = (url) => fetch(url).then((res) => res.json());
   // const { data, error } = useSWR(
@@ -52,6 +53,7 @@ function QuestionList() {
                     <div>{question.query}</div>
                   </a>
                 </Link>
+
                 {/* <Box sx={{ backgroundColor: 'pink' }}>
                   <Link href={`question/${question.id}`}>
                     <a>詳しくはこちら</a>

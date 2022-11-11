@@ -13,6 +13,10 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: '#e4af9b',
+          '&:hover': {
+            // hover時背景色
+            background: '#e4af9b',
+          },
         },
       },
     },
