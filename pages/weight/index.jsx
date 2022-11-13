@@ -71,14 +71,21 @@ const Graph = () => {
 
   // react-firebase-hooksの処理
 
+  // 2022/10/1
+  const first = moment().startOf('month');
+  // 2022/10/31
+  const end = moment().endOf('month');
+  // 上記の差 = 30
+  const diff = end.diff(first, 'days');
   // ログインしているユーザーの商法の取得
   const [user, LoadingUser, ErrorUser] = useAuthState(auth);
   const [values, loading, error, snapshot] = useCollectionData(
     query(
       // collection(db, 'user', '1', 'weight'),
       collection(db, 'user', user?.uid ?? 'dummy', 'weight'),
-      where(documentId(), '>=', '20221001'),
-      where(documentId(), '<=', '20221031'),
+      // グラフX軸のデータの取得条件
+      where(documentId(), '>=', first.format('YYYYMMDD')),
+      where(documentId(), '<=', end.format('YYYYMMDD')),
       orderBy(documentId(), 'asc')
     ).withConverter(withIDConverter)
   );
@@ -88,20 +95,15 @@ const Graph = () => {
     return <>Loading...</>;
   }
 
-  // 2022/10/1
-  const first = moment().startOf('month');
-  // 2022/10/31
-  const end = moment().endOf('month');
-  // 上記の差 = 30
-  const diff = end.diff(first, 'days');
-
   // [20221001, 20221002, ...., 20221031]を作りたい
-
+  const labelDisplayFormat = 'MM月DD日';
   const labels = new Array(diff + 1)
     // [undefined, undefined, ...., undefined]
     .fill(undefined)
     .map((_val, idx) => {
-      return moment(first).add(idx, 'days').format('MMDD');
+      return moment(first)
+        .add(idx, 'days')
+        .format(labelDisplayFormat);
     });
 
   const weightList = labels.map((date, index) => {
@@ -109,7 +111,11 @@ const Graph = () => {
     // if (index === false) {
     //   return values?.find((value) => value.id === date - 1)?.weight;
     // }
-    return values?.find((value) => value.id === date)?.weight;
+
+    return values?.find(
+      // idをYYYYMMDDからMMDDへ文字列へ変換して、labelsと比較する
+      (value) => moment(value.id).format(labelDisplayFormat) === date
+    )?.weight;
   });
 
   const data = {

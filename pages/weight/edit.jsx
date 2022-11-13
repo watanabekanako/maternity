@@ -13,18 +13,26 @@ import { DatePicker } from '@mui/x-date-pickers';
 
 export default function WeightEdit({}) {
   const [weight, setWeight] = useState();
-  const [data, setData] = useState();
+  // モーメント型の日付
+  const [date, setDate] = useState(moment());
   const [user, loadingUser, errorUser] = useAuthState(auth);
   const onClickCreate = async () => {
     await setDoc(
-      doc(db, 'user', user?.uid ?? 'dummy', 'weight', data),
-      data,
+      // 第一引数が保存先
+      doc(
+        db,
+        'user',
+        user?.uid ?? 'dummy',
+        'weight',
+        date.format('YYYYMMDD')
+      ),
+      // 第二引数が保存するデータ
       { weight: weight }
     );
   };
   // console.log(db);
   // console.log(values);
-  console.log(data);
+  console.log(date);
   return (
     <DefaultLayout>
       <Box textAlign="center">
@@ -39,15 +47,16 @@ export default function WeightEdit({}) {
             sx={{ width: 600 }}
             variant="outlined"
             margin="dense"
-            value={data}
+            value={date}
             onChange={(value) => {
-              setData(value);
+              setDate(value);
             }}
             renderInput={(params) => <TextField {...params} />}
           />
         </Box>
         <TextField
-          type="text"
+          type="number"
+          inputProps={{ step: 0.1, min: 0 }}
           label="体重"
           name="weight"
           value={weight}
