@@ -46,7 +46,7 @@ function QuestionList() {
         // console.log(values);
         return (
           <>
-            <Paper elevation={3} sx={{ padding: 2 }}>
+            <Paper elevation={3} sx={{ padding: 2, marginBottom: 5 }}>
               <div key={index}>
                 <Link href={`question/${question.id}`}>
                   <a>

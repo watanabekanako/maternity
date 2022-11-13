@@ -13,7 +13,7 @@ import {
   documentId,
 } from 'firebase/firestore';
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 export default function Question() {
   const router = useRouter();
   const { id } = router.query;
@@ -43,12 +43,10 @@ export default function Question() {
   return (
     <DefaultLayout>
       <Box textAlign="center">
-        <p>
-          <h2>{values.query}</h2>
-          {/* values.xxxはfirestoreで登録したフィールド */}
-          {/* {values.test} */}
-          {values.answer}
-        </p>
+        <Typography variant="h3">{values.query}</Typography>
+        {/* values.xxxはfirestoreで登録したフィールド */}
+        {/* {values.test} */}
+        <Typography>{values.answer} </Typography>
       </Box>
 
       <Box textAlign="center">

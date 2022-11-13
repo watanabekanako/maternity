@@ -39,7 +39,7 @@ ChartJS.register(
 );
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Box } from '@mui/material';
-
+import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 const Graph = () => {
   const options = {
     responsive: true,
@@ -101,7 +101,7 @@ const Graph = () => {
     // [undefined, undefined, ...., undefined]
     .fill(undefined)
     .map((_val, idx) => {
-      return moment(first).add(idx, 'days').format('YYYYMMDD');
+      return moment(first).add(idx, 'days').format('MMDD');
     });
 
   const weightList = labels.map((date, index) => {
@@ -129,7 +129,10 @@ const Graph = () => {
     <>
       <DefaultLayout style={{}}>
         <Box textAlign="center">
-          <h1>体重管理</h1>
+          <h1>
+            体重管理
+            <MonitorWeightIcon fontSize="large" />
+          </h1>
           <Line options={options} data={data} />
           {/* <Button variant="contained" disabled> */}
           <Link href="weight/edit" passHref>

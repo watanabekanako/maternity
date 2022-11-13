@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import { TextField } from '@mui/material';
 import { Box } from '@mui/system';
+import NoteAltIcon from '@mui/icons-material/NoteAlt';
 export default function Diary() {
   const [diary, setDiary] = useState();
 
@@ -22,7 +23,9 @@ export default function Diary() {
   return (
     <DefaultLayout>
       <Box textAlign="center">
-        <h1>日記</h1>
+        <h1>
+          日記 <NoteAltIcon fontSize="large" />
+        </h1>
 
         <p>日付</p>
 

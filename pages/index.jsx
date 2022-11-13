@@ -8,6 +8,7 @@ import { styled } from '@mui/material/styles';
 import Image from 'next/image';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
+import Link from 'next/link';
 // import Answer from './question/Answer';
 function ResponsiveAppBar() {
   const Item = styled(Paper)(({ theme }) => ({
@@ -29,7 +30,6 @@ function ResponsiveAppBar() {
             <h1>「mama＋」</h1>
             <p>妊婦さんのための便利な機能が揃っています</p>
             <p></p>
-            {/* <Answer /> */}
             <Grid container spacing={4}>
               <Grid item xs={3}>
                 <Item>
@@ -83,14 +83,13 @@ function ResponsiveAppBar() {
                   </p>
                 </Item>
               </Grid>
-              {/* <Grid item xs={4}>
-              <Image src="/img/baby.jpg" width={500} height={500} />
-            </Grid> */}
             </Grid>
             {!user && (
-              <Button variant="contained" to="/">
-                新規会員登録はこちらから
-              </Button>
+              <Link href="/register" passHref>
+                <Button variant="contained" to="/">
+                  新規会員登録はこちらから
+                </Button>
+              </Link>
             )}
           </Box>
         </React.Fragment>

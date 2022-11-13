@@ -17,13 +17,8 @@ export default function WeightEdit({}) {
   const [user, loadingUser, errorUser] = useAuthState(auth);
   const onClickCreate = async () => {
     await setDoc(
-      doc(
-        db,
-        'user',
-        user?.uid ?? 'dummy',
-        'weight',
-        data.moment('YYYYMMDD')
-      ),
+      doc(db, 'user', user?.uid ?? 'dummy', 'weight', data),
+      data,
       { weight: weight }
     );
   };
@@ -45,8 +40,8 @@ export default function WeightEdit({}) {
             variant="outlined"
             margin="dense"
             value={data}
-            onChange={(e) => {
-              setData(e.target.value);
+            onChange={(value) => {
+              setData(value);
             }}
             renderInput={(params) => <TextField {...params} />}
           />

@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { Box } from '@mui/system';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
 
 const Login = () => {
   const router = useRouter();
@@ -31,7 +33,20 @@ const Login = () => {
       formValues.password
     );
   };
-  const [passwordType, setPasswordType] = useState('');
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   React.useEffect(() => {
     // ユーザーがある = ログインできた時の処理
@@ -39,7 +54,7 @@ const Login = () => {
       router.push('/baby');
     }
   }, [user]);
-
+  const [isRevealPassword, setIsRevealPassword] = useState(false);
   return (
     <DefaultLayout>
       <Box textAlign="center">
@@ -67,7 +82,8 @@ const Login = () => {
             variant="outlined"
             margin="dense"
             sx={{ width: 600, margin: 10 }}
-            type="passwordType"
+            // type="passwordType"
+            type={isRevealPassword ? 'text' : 'password'}
             value={formValues.password}
             onChange={(e) => {
               setFormValues({
@@ -75,20 +91,22 @@ const Login = () => {
                 password: e.target.value,
               });
             }}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {formValues.showPassword ? (
+                    <VisibilityOff />
+                  ) : (
+                    <Visibility />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            }
           />
-          {passwordType === 'password' && (
-            <VisibilityOffIcon
-              onClick={() => setPasswordType('text')}
-              className="Password__visual"
-            />
-          )}
-          {/* // 表示 */}
-          {passwordType === 'text' && (
-            <VisibilityIcon
-              onClick={() => setPasswordType('password')}
-              className="Password__visual"
-            />
-          )}
         </div>
         <Button variant="contained" onClick={handleLogin}>
           ログイン

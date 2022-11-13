@@ -5,6 +5,8 @@ import Container from '@mui/material/Container';
 import moment from 'moment';
 import useSWR from 'swr';
 import Image from 'next/image';
+import Link from 'next/link';
+import Button from '@mui/material/Button';
 import DefaultLayout from '../components/layout/DefaultLayout';
 import {
   useCollectionData,
@@ -21,7 +23,8 @@ import {
 } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Box } from '@mui/system';
-import { Typography } from '@mui/material';
+
+import { Grid, Typography } from '@mui/material';
 import { Boy } from '@mui/icons-material';
 // const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -52,14 +55,11 @@ const Baby = () => {
       <DefaultLayout style={{ color: 'red' }}>
         <React.Fragment>
           <Box textAlign="center" margin={10}>
-            <Image src="/img/baby.png" width={500} height={500} />
             <Typography variant="h4">
               出産予定日まであと
-              <Box variant="h4" sx={{ color: '#e4af9b' }}>
-                {diff}
-              </Box>
-              日
+              {/* <span style={{color: 'red'}}}>{diff}日</span> */}
             </Typography>
+            <Image src="/img/baby.png" width={500} height={500} />
           </Box>
         </React.Fragment>
       </DefaultLayout>
