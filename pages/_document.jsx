@@ -1,19 +1,28 @@
 import * as React from 'react';
 import Document, {
-  Head,
   Html,
+  Head,
   Main,
   NextScript,
 } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 import createEmotionCache from '../createEmotionCache';
-import { ServerStyleSheets as JSSServerStyleSheets } from '@mui/styles';
+import theme from '../theme';
 
 export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="ja">
-        <Head>{this.props.emotionStyleTags}</Head>
+        <Head>
+          <meta
+            name="theme-color"
+            content={theme.palette.primary.main}
+          />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
@@ -27,12 +36,11 @@ MyDocument.getInitialProps = async (ctx) => {
   const originalRenderPage = ctx.renderPage;
   const cache = createEmotionCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
-  const jssSheets = new JSSServerStyleSheets();
 
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: (App) => (props) =>
-        jssSheets.collect(<App emotionCache={cache} {...props} />),
+        <App emotionCache={cache} {...props} />,
     });
 
   const initialProps = await Document.getInitialProps(ctx);

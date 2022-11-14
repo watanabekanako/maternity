@@ -53,15 +53,20 @@ const Baby = () => {
   return (
     <React.Fragment>
       <DefaultLayout style={{ color: 'red' }}>
-        <React.Fragment>
-          <Box textAlign="center" margin={10}>
-            <Typography variant="h4">
-              出産予定日まであと
-              {/* <span style={{color: 'red'}}}>{diff}日</span> */}
+        <Box textAlign="center" margin={10}>
+          <Typography variant="h4" nowrap={true}>
+            出産予定日まであと
+            <Typography
+              variant="h4"
+              sx={{ color: 'pink' }}
+              nowrap={true}
+            >
+              {diff}
             </Typography>
-            <Image src="/img/baby.png" width={500} height={500} />
-          </Box>
-        </React.Fragment>
+            日です
+          </Typography>
+          <Image src="/img/baby.png" width={500} height={500} />
+        </Box>
       </DefaultLayout>
     </React.Fragment>
   );

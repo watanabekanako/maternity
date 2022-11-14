@@ -30,6 +30,24 @@ const Register = () => {
     setFormvalues({ ...formValues, [name]: value });
     console.log(formValues);
   };
+
+  React.useEffect(() => {
+    if (user) {
+      // firestoreにユーザーのデータを保存
+      setDoc(doc(db, 'user', user.user.uid), {
+        username: formValues.username,
+        birthDate: moment(
+          formValues.birthDate,
+          'YYYY/MM/DD'
+        ).toDate(),
+      }).then(() => {
+        // 登録成功時の処理
+        // 登録が終わったらログイン画面に遷移する
+        router.push('login');
+      });
+    }
+  }, [user]);
+
   console.log(handleSubmit);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,22 +64,22 @@ const Register = () => {
         formValues.mailAddress,
         formValues.password
       );
-      if (user) {
-        // firestoreにユーザーのデータを保存
-        await setDoc(doc(db, 'user', user.user.uid), {
-          username: formValues.username,
-          birthDate: moment(
-            formValues.birthDate,
-            'YYYY/MM/DD'
-          ).toDate(),
-        });
-        // 登録成功時の処理
-        // 登録が終わったらログイン画面に遷移する
-        router.push('/login');
-      } else if (error) {
-        // 登録失敗時の処理
-        console.log(error.message);
-      }
+      // if (user) {
+      //   // firestoreにユーザーのデータを保存
+      //   await setDoc(doc(db, 'user', user.user.uid), {
+      //     username: formValues.username,
+      //     birthDate: moment(
+      //       formValues.birthDate,
+      //       'YYYY/MM/DD'
+      //     ).toDate(),
+      //   });
+      //   // 登録成功時の処理
+      //   // 登録が終わったらログイン画面に遷移する
+      //   router.push('/login');
+      // } else if (error) {
+      //   // 登録失敗時の処理
+      //   console.log(error.message);
+      // }
     }
   };
 
