@@ -14,7 +14,16 @@ export default function DiaryPage() {
             日記一覧
             <NoteAltIcon fontSize="large" />
           </h1>
+          {!(<DiaryList />) && (
+            <>
+              <p>一日の振り返りに日記を記入してみましょう。</p>
+              <p>
+                体調の変化やその日の出来事など書いておくと、あとから振り返ることができますよ。
+              </p>
+            </>
+          )}
           <DiaryList />
+
           <Link href="diary/edit" passHref>
             <Button variant="contained">日記を登録する</Button>
           </Link>

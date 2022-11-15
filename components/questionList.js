@@ -7,7 +7,7 @@ import {
   useDocumentData,
 } from 'react-firebase-hooks/firestore';
 import { db, withIDConverter } from '../firebase';
-
+import Stack from '@mui/material/Stack';
 import {
   doc,
   collection,
@@ -17,6 +17,7 @@ import {
   documentId,
 } from 'firebase/firestore';
 import { Button } from '@mui/material';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 function QuestionList() {
   // const fetcher = (url) => fetch(url).then((res) => res.json());
   // const { data, error } = useSWR(
@@ -46,20 +47,21 @@ function QuestionList() {
         // console.log(values);
         return (
           <>
-            <Paper elevation={3} sx={{ padding: 2, marginBottom: 5 }}>
-              <div key={index}>
-                <Link href={`question/${question.id}`}>
-                  <a>
-                    <div>{question.query}</div>
-                  </a>
-                </Link>
-
-                {/* <Box sx={{ backgroundColor: 'pink' }}>
+            <Paper elevation={3} sx={{ padding: 2 }}>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <div key={index}>
                   <Link href={`question/${question.id}`}>
-                    <a>詳しくはこちら</a>
+                    <a>
+                      <div>{question.query}</div>
+                    </a>
                   </Link>
-                </Box> */}
-              </div>
+                </div>
+                <ArrowForwardIosIcon />
+              </Stack>
             </Paper>
           </>
         );

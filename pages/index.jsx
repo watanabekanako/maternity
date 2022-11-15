@@ -42,6 +42,17 @@ function ResponsiveAppBar() {
                   <p>
                     出産予定日をまでのカウントダウンを行います。簡単に出産までの日付を確認できます。
                   </p>
+                  {user ? (
+                    <Link href="weight/edit" passHref>
+                      <Button variant="contained" to="/">
+                        確認する
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Button variant="contained" to="/">
+                      会員登録すると見ることができます
+                    </Button>
+                  )}
                 </Item>
               </Grid>
               <Grid item xs={3}>
@@ -55,6 +66,13 @@ function ResponsiveAppBar() {
                   <p>
                     体重を折線グラフで表示するため、パッと見て体重の増減を確認することができます。
                   </p>
+                  {user && (
+                    <Link href="weight/edit" passHref>
+                      <Button variant="contained" to="/">
+                        記録する
+                      </Button>
+                    </Link>
+                  )}
                 </Item>
               </Grid>
               <Grid item xs={3}>
@@ -68,6 +86,13 @@ function ResponsiveAppBar() {
                   <p>
                     妊娠期間中の日記を登録することができます。日々の体調の変化など後から振り返ることができます。
                   </p>
+                  {user && (
+                    <Link href="weight/edit" passHref>
+                      <Button variant="contained" to="/">
+                        記録する
+                      </Button>
+                    </Link>
+                  )}
                 </Item>
               </Grid>
               <Grid item xs={3}>
@@ -81,6 +106,11 @@ function ResponsiveAppBar() {
                   <p>
                     妊婦さんがよく疑問に感じることを、まとめているため、気になった時に確認することができます。
                   </p>
+                  <Link href="/question" passHref>
+                    <Button variant="contained" to="/">
+                      こちらから
+                    </Button>
+                  </Link>
                 </Item>
               </Grid>
             </Grid>

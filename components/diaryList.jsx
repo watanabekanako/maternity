@@ -32,21 +32,42 @@ function DiaryList() {
   if (loading) {
     return <>loading...</>;
   }
+
   return (
     <>
-      <p>
-        {values.map((diary, index) => {
-          return (
-            <>
+      {values && values?.length > 0 ? (
+        // データがある時
+        <>
+          {values.map((diary, index) => {
+            return (
+              // 既存のコンポーネント
               <Paper sx={{ padding: 2 }}>
                 <div key={index}>
                   <div>{diary.id}</div>
                 </div>
               </Paper>
-            </>
-          );
-        })}
-      </p>
+            );
+          })}
+        </>
+      ) : (
+        // データが無いとき
+        <>
+          <p>一日の振り返りに日記を記入してみましょう。</p>
+          <p>
+            体調の変化やその日の出来事など書いておくと、あとから振り返ることができますよ。
+          </p>
+          {values.map((diary, index) => {
+            return (
+              // 既存のコンポーネント
+              <Paper sx={{ padding: 2 }}>
+                <div key={index}>
+                  <div>{diary.id}</div>
+                </div>
+              </Paper>
+            );
+          })}
+        </>
+      )}
     </>
   );
 }

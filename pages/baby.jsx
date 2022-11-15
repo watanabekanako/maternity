@@ -54,16 +54,16 @@ const Baby = () => {
     <React.Fragment>
       <DefaultLayout style={{ color: 'red' }}>
         <Box textAlign="center" margin={10}>
-          <Typography variant="h4" nowrap={true}>
-            出産予定日まであと
+          <Typography variant="h4">
+            <Typography variant="h4">出産予定日まで</Typography>あと
             <Typography
-              variant="h4"
-              sx={{ color: 'pink' }}
-              nowrap={true}
+              variant="h2"
+              sx={{ color: '#E4AF9B' }}
+              component={'span'}
             >
               {diff}
             </Typography>
-            日です
+            日
           </Typography>
           <Image src="/img/baby.png" width={500} height={500} />
         </Box>

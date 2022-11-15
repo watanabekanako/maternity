@@ -124,8 +124,8 @@ const Graph = () => {
       {
         label: '体重',
         data: weightList,
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: '#E4AF9B',
+        backgroundColor: '#E4AF9B',
         spanGaps: true,
       },
     ],
