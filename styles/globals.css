@@ -18,3 +18,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+h1 {
+  /*線の種類（点線）2px 線色*/
+  border-bottom: dashed 4px #e4af9b;
+  display: inline-block;
+}

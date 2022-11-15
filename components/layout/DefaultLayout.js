@@ -130,9 +130,6 @@ function DefaultLayout({ children, style }) {
                 ))}
               </Menu>
             </Box>
-            <AdbIcon
-              sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
-            />
             <Typography
               variant="h5"
               noWrap
@@ -149,7 +146,7 @@ function DefaultLayout({ children, style }) {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              mama＋
             </Typography>
             <Box
               sx={{

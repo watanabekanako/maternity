@@ -26,6 +26,7 @@ import { Box } from '@mui/system';
 
 import { Grid, Typography } from '@mui/material';
 import { Boy } from '@mui/icons-material';
+import { format } from 'path';
 // const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Baby = () => {
@@ -49,11 +50,13 @@ const Baby = () => {
   const m2 = moment();
   const diff = m1.diff(m2, 'days');
   console.log(values);
-
+  const m3 = moment().format('YYYY年MM月DD日');
   return (
     <React.Fragment>
       <DefaultLayout style={{ color: 'red' }}>
         <Box textAlign="center" margin={10}>
+          <p>今日の日付：{m3}</p>
+          <Image src="/img/baby.png" width={500} height={500} />
           <Typography variant="h4">
             <Typography variant="h4">出産予定日まで</Typography>あと
             <Typography
@@ -65,7 +68,6 @@ const Baby = () => {
             </Typography>
             日
           </Typography>
-          <Image src="/img/baby.png" width={500} height={500} />
         </Box>
       </DefaultLayout>
     </React.Fragment>
