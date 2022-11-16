@@ -1,6 +1,6 @@
 import React from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import WeightEdit from '../weight/edit';
+import WeightEdit from '../../components/edit';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import {
@@ -167,7 +167,9 @@ const Graph = () => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={style}>{<WeightEdit />}</Box>
+            <Box sx={style}>
+              {<WeightEdit onClickSave={handleClose} />}
+            </Box>
           </Modal>
         </Box>
       </DefaultLayout>

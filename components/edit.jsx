@@ -1,18 +1,22 @@
 import Link from 'next/link';
-import DefaultLayout from '../../components/layout/DefaultLayout';
+import DefaultLayout from './layout/DefaultLayout';
 import { doc, setDoc } from 'firebase/firestore';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
-import { db } from '../../firebase';
+import { db } from '../firebase';
 import React, { useState } from 'react';
 import moment from 'moment';
 import { Box } from '@mui/system';
 import { Button, TextField } from '@mui/material';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../firebase';
+import { auth } from '../firebase';
 import { DatePicker } from '@mui/x-date-pickers';
 
 export default function WeightEdit({}) {
   const [weight, setWeight] = useState();
+
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
+
   // モーメント型の日付
   const [date, setDate] = useState(moment());
   const [user, loadingUser, errorUser] = useAuthState(auth);
@@ -65,11 +69,13 @@ export default function WeightEdit({}) {
         }}
       />
       <div>
-        <Link href="../weight">
-          <Button variant="contained" onClick={() => onClickCreate()}>
-            保存
-          </Button>
-        </Link>
+        <Button
+          variant="contained"
+          onClick={() => onClickCreate()}
+          onClickSave={handleClose}
+        >
+          保存
+        </Button>
       </div>
     </Box>
 
