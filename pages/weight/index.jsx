@@ -1,6 +1,6 @@
 import React from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
-import WeightEdit from '../../components/edit';
+import WeightEdit from '../../components/WeightEdit';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import {

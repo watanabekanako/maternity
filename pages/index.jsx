@@ -66,12 +66,16 @@ function ResponsiveAppBar() {
                   <p>
                     体重を折線グラフで表示するため、パッと見て体重の増減を確認することができます。
                   </p>
-                  {user && (
+                  {user ? (
                     <Link href="weight" passHref>
                       <Button variant="contained" to="/">
-                        記録する
+                        確認する
                       </Button>
                     </Link>
+                  ) : (
+                    <Button variant="contained" to="/">
+                      会員登録すると見ることができます
+                    </Button>
                   )}
                 </Item>
               </Grid>
@@ -86,12 +90,16 @@ function ResponsiveAppBar() {
                   <p>
                     妊娠期間中の日記を登録することができます。日々の体調の変化など後から振り返ることができます。
                   </p>
-                  {user && (
+                  {user ? (
                     <Link href="diary" passHref>
                       <Button variant="contained" to="/">
-                        記録する
+                        確認する
                       </Button>
                     </Link>
+                  ) : (
+                    <Button variant="contained" to="/">
+                      会員登録すると見ることができます
+                    </Button>
                   )}
                 </Item>
               </Grid>
@@ -116,7 +124,7 @@ function ResponsiveAppBar() {
             </Grid>
             {!user && (
               <Link href="/register" passHref>
-                <Button variant="contained" to="/">
+                <Button variant="contained" to="/" sx={{ margin: 8 }}>
                   新規会員登録はこちらから
                 </Button>
               </Link>

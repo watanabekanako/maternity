@@ -12,7 +12,8 @@ import {
   useCollectionData,
   useDocumentData,
 } from 'react-firebase-hooks/firestore';
-import { auth, db } from '../firebase';
+import { auth, db, withIDConverter } from '../firebase';
+
 import {
   doc,
   collection,
@@ -39,26 +40,62 @@ const Baby = () => {
   );
 
   // console.log(values[0].query);
-  if (loading) {
-    return <>loading...</>;
-  }
+  // if (loading) {
+  //   return <>loading...</>;
+  // }
   // console.log(moment.unix(values.birthDate.seconds));
   // console.log(data);
   // const moment = require('moment');
+
+  const [
+    valuesMessage,
+    loadingMessage,
+    errorMessage,
+    snapshotMessage,
+  ] = useCollectionData(
+    collection(db, 'message').withConverter(withIDConverter)
+  );
+
+  console.log(valuesMessage);
+  console.log(loading);
+  if (loading) {
+    return <>loading...</>;
+  }
   const m1 = moment.unix(values?.birthDate.seconds);
 
   const m2 = moment();
   const diff = m1.diff(m2, 'days');
   console.log(values);
 
+  // ママへのメッセージ
+  // 残りの日数diffの条件分岐
+  // 100日以下
+  // 50日以下
+  // const message = () => {
+  //   if (diff < 50) {
+  //     return { valuesMessage.message };
+  //   }
+  // };
+
   return (
     <React.Fragment>
-      <DefaultLayout style={{ color: 'red' }}>
+      <DefaultLayout style={{ border: 2 }}>
         <Box textAlign="center" margin={10}>
           <p>今日の日付：{moment().format('YYYY年MM月DD日')}</p>
           <Image src="/img/baby.png" width={500} height={500} />
-          <Typography variant="h4">
-            <Typography variant="h4">出産予定日まで</Typography>あと
+          <Typography
+            variant="h4"
+            sx={{
+              border: 2,
+              padding: 4,
+              borderRadius: 14,
+              color: '#E4AF9B',
+            }}
+          >
+            <Typography variant="h4" sx={{ color: '#705040' }}>
+              出産予定日まで
+            </Typography>
+            あと
             <Typography
               variant="h2"
               sx={{ color: '#E4AF9B' }}
@@ -68,6 +105,8 @@ const Baby = () => {
             </Typography>
             日
           </Typography>
+          <Typography>ママへのメッセージ</Typography>
+          <p></p>
         </Box>
       </DefaultLayout>
     </React.Fragment>

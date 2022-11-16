@@ -11,7 +11,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import { DatePicker } from '@mui/x-date-pickers';
 
-export default function WeightEdit({}) {
+export default function WeightEdit({ onClickSave }) {
   const [weight, setWeight] = useState();
 
   const [open, setOpen] = React.useState(false);
@@ -41,7 +41,7 @@ export default function WeightEdit({}) {
     // <DefaultLayout>
     <Box textAlign="center">
       {/* <h1>体重管理</h1> */}
-      <p>今日の日付と体重を入力してね！</p>
+      <p>日付と体重を入力してね！</p>
       <Box>
         <DatePicker
           // error={formErrors.birthDate}
@@ -71,8 +71,7 @@ export default function WeightEdit({}) {
       <div>
         <Button
           variant="contained"
-          onClick={() => onClickCreate()}
-          onClickSave={handleClose}
+          onClick={() => onClickCreate(onClickSave)}
         >
           保存
         </Button>

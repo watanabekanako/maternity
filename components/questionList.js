@@ -47,7 +47,7 @@ function QuestionList() {
         // console.log(values);
         return (
           <>
-            <Paper elevation={3} sx={{ padding: 2 }}>
+            <Paper elevation={3} sx={{ padding: 2, margin: 4 }}>
               <Stack
                 direction="row"
                 justifyContent="space-between"

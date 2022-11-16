@@ -33,6 +33,7 @@ function DefaultLayout({ children, style }) {
     : [
         { label: 'Top', href: '/' },
         { label: 'Q&A', href: '/question' },
+        { label: 'Login', href: '/login' },
         { label: '新規会員登録', href: '/register' },
       ];
   const settings = ['Account', 'Logout'];
