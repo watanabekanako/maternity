@@ -50,12 +50,12 @@ const Baby = () => {
   const m2 = moment();
   const diff = m1.diff(m2, 'days');
   console.log(values);
-  const m3 = moment().format('YYYY年MM月DD日');
+
   return (
     <React.Fragment>
       <DefaultLayout style={{ color: 'red' }}>
         <Box textAlign="center" margin={10}>
-          <p>今日の日付：{m3}</p>
+          <p>今日の日付：{moment().format('YYYY年MM月DD日')}</p>
           <Image src="/img/baby.png" width={500} height={500} />
           <Typography variant="h4">
             <Typography variant="h4">出産予定日まで</Typography>あと

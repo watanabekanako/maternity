@@ -43,7 +43,7 @@ function ResponsiveAppBar() {
                     出産予定日をまでのカウントダウンを行います。簡単に出産までの日付を確認できます。
                   </p>
                   {user ? (
-                    <Link href="weight/edit" passHref>
+                    <Link href="baby" passHref>
                       <Button variant="contained" to="/">
                         確認する
                       </Button>
@@ -67,7 +67,7 @@ function ResponsiveAppBar() {
                     体重を折線グラフで表示するため、パッと見て体重の増減を確認することができます。
                   </p>
                   {user && (
-                    <Link href="weight/edit" passHref>
+                    <Link href="weight" passHref>
                       <Button variant="contained" to="/">
                         記録する
                       </Button>
@@ -87,7 +87,7 @@ function ResponsiveAppBar() {
                     妊娠期間中の日記を登録することができます。日々の体調の変化など後から振り返ることができます。
                   </p>
                   {user && (
-                    <Link href="weight/edit" passHref>
+                    <Link href="diary" passHref>
                       <Button variant="contained" to="/">
                         記録する
                       </Button>

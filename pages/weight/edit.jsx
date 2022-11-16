@@ -34,43 +34,45 @@ export default function WeightEdit({}) {
   // console.log(values);
   console.log(date);
   return (
-    <DefaultLayout>
-      <Box textAlign="center">
-        <h1>体重管理</h1>
-        <p>今日の日付と体重を入力してね！</p>
-        <Box>
-          <DatePicker
-            // error={formErrors.birthDate}
-            // helperText={formErrors.birthDate}
-            id="outlined-basic"
-            label="日付"
-            sx={{ width: 600 }}
-            variant="outlined"
-            margin="dense"
-            value={date}
-            onChange={(value) => {
-              setDate(value);
-            }}
-            renderInput={(params) => <TextField {...params} />}
-          />
-        </Box>
-        <TextField
-          type="number"
-          inputProps={{ step: 0.1, min: 0 }}
-          label="体重"
-          name="weight"
-          value={weight}
-          onChange={(e) => {
-            setWeight(Number(e.target.value));
+    // <DefaultLayout>
+    <Box textAlign="center">
+      {/* <h1>体重管理</h1> */}
+      <p>今日の日付と体重を入力してね！</p>
+      <Box>
+        <DatePicker
+          // error={formErrors.birthDate}
+          // helperText={formErrors.birthDate}
+          id="outlined-basic"
+          label="日付"
+          sx={{ width: 600 }}
+          variant="outlined"
+          margin="dense"
+          value={date}
+          onChange={(value) => {
+            setDate(value);
           }}
+          renderInput={(params) => <TextField {...params} />}
         />
-
+      </Box>
+      <TextField
+        type="number"
+        inputProps={{ step: 0.1, min: 0 }}
+        label="体重"
+        name="weight"
+        value={weight}
+        onChange={(e) => {
+          setWeight(Number(e.target.value));
+        }}
+      />
+      <div>
         <Link href="../weight">
           <Button variant="contained" onClick={() => onClickCreate()}>
             保存
           </Button>
         </Link>
-      </Box>
-    </DefaultLayout>
+      </div>
+    </Box>
+
+    // </DefaultLayout>
   );
 }
