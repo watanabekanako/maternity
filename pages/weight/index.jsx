@@ -168,7 +168,7 @@ const Graph = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              {<WeightEdit onClickSave={handleClose} />}
+              <WeightEdit onClickSave={handleClose} />
             </Box>
           </Modal>
         </Box>

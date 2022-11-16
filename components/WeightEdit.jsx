@@ -14,12 +14,10 @@ import { DatePicker } from '@mui/x-date-pickers';
 export default function WeightEdit({ onClickSave }) {
   const [weight, setWeight] = useState();
 
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(false);
-
   // モーメント型の日付
   const [date, setDate] = useState(moment());
   const [user, loadingUser, errorUser] = useAuthState(auth);
+
   const onClickCreate = async () => {
     await setDoc(
       // 第一引数が保存先
@@ -33,6 +31,7 @@ export default function WeightEdit({ onClickSave }) {
       // 第二引数が保存するデータ
       { weight: weight }
     );
+    onClickSave();
   };
   // console.log(db);
   // console.log(values);
@@ -69,10 +68,7 @@ export default function WeightEdit({ onClickSave }) {
         }}
       />
       <div>
-        <Button
-          variant="contained"
-          onClick={() => onClickCreate(onClickSave)}
-        >
+        <Button variant="contained" onClick={() => onClickCreate()}>
           保存
         </Button>
       </div>
