@@ -43,10 +43,14 @@ export default function Question() {
   return (
     <DefaultLayout>
       <Box textAlign="center">
-        <Typography variant="h3">{values.query}</Typography>
+        <Typography variant="h4" sx={{ margin: 4 }}>
+          {values.query}
+        </Typography>
         {/* values.xxxはfirestoreで登録したフィールド */}
         {/* {values.test} */}
-        <Typography>{values.answer} </Typography>
+        <Typography variant="h5" sx={{ margin: 2 }}>
+          {values.answer}
+        </Typography>
       </Box>
 
       <Box textAlign="center">

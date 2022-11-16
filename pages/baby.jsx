@@ -58,9 +58,11 @@ const Baby = () => {
 
   console.log(valuesMessage);
   console.log(loading);
-  if (loading) {
+  // どちらかがtrueだったらloadingを返す
+  if (loading || loadingMessage) {
     return <>loading...</>;
   }
+
   const m1 = moment.unix(values?.birthDate.seconds);
 
   const m2 = moment();
@@ -81,17 +83,20 @@ const Baby = () => {
     <React.Fragment>
       <DefaultLayout style={{ border: 2 }}>
         <Box textAlign="center" margin={10}>
-          <p>今日の日付：{moment().format('YYYY年MM月DD日')}</p>
+          <h1>today：{moment().format('YYYY/MM/DD')}</h1>
           <Image src="/img/baby.png" width={500} height={500} />
-          <Typography
+          {/* <Typography
             variant="h4"
             sx={{
               border: 2,
               padding: 4,
               borderRadius: 14,
-              color: '#E4AF9B',
+              borderColor: '#E4AF9B',
+              padding: '40px',
+              // display: 'inline-block',
             }}
-          >
+          > */}
+          <h1>
             <Typography variant="h4" sx={{ color: '#705040' }}>
               出産予定日まで
             </Typography>
@@ -104,7 +109,7 @@ const Baby = () => {
               {diff}
             </Typography>
             日
-          </Typography>
+          </h1>
           <Typography>ママへのメッセージ</Typography>
           <p></p>
         </Box>

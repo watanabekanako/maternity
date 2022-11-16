@@ -6,7 +6,7 @@ import { db } from '../firebase';
 import React, { useState } from 'react';
 import moment from 'moment';
 import { Box } from '@mui/system';
-import { Button, TextField } from '@mui/material';
+import { Button, Stack, TextField } from '@mui/material';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import { DatePicker } from '@mui/x-date-pickers';
@@ -41,7 +41,7 @@ export default function WeightEdit({ onClickSave }) {
     <Box textAlign="center">
       {/* <h1>体重管理</h1> */}
       <p>日付と体重を入力してね！</p>
-      <Box>
+      <Stack spacing={2}>
         <DatePicker
           // error={formErrors.birthDate}
           // helperText={formErrors.birthDate}
@@ -56,22 +56,22 @@ export default function WeightEdit({ onClickSave }) {
           }}
           renderInput={(params) => <TextField {...params} />}
         />
-      </Box>
-      <TextField
-        type="number"
-        inputProps={{ step: 0.1, min: 0 }}
-        label="体重"
-        name="weight"
-        value={weight}
-        onChange={(e) => {
-          setWeight(Number(e.target.value));
-        }}
-      />
-      <div>
+
+        <TextField
+          type="number"
+          inputProps={{ step: 0.1, min: 0 }}
+          label="体重"
+          name="weight"
+          value={weight}
+          onChange={(e) => {
+            setWeight(Number(e.target.value));
+          }}
+        />
+
         <Button variant="contained" onClick={() => onClickCreate()}>
           保存
         </Button>
-      </div>
+      </Stack>
     </Box>
 
     // </DefaultLayout>
