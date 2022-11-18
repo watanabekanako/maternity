@@ -13,6 +13,7 @@ import {
   documentId,
 } from 'firebase/firestore';
 import DefaultLayout from '../../components/layout/DefaultLayout';
+import Link from 'next/link';
 import { Box, Button, Typography } from '@mui/material';
 export default function Question() {
   const router = useRouter();
@@ -54,9 +55,11 @@ export default function Question() {
       </Box>
 
       <Box textAlign="center">
-        <Button variant="contained" to="/">
-          質問一覧へ戻る
-        </Button>
+        <Link href="/question" passHref>
+          <Button variant="contained" to="/">
+            質問一覧へ戻る
+          </Button>
+        </Link>
       </Box>
     </DefaultLayout>
   );

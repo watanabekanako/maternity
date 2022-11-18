@@ -16,6 +16,8 @@ import {
   documentId,
 } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import moment from 'moment';
+import { Stack } from '@mui/system';
 function DiaryList() {
   // ログインした状態にて取得したい
   const [user, loadingUser, errorUser] = useAuthState(auth);
@@ -41,9 +43,10 @@ function DiaryList() {
           {values.map((diary, index) => {
             return (
               // 既存のコンポーネント
-              <Paper sx={{ padding: 2 }}>
+              <Paper sx={{ padding: 2, margin: 4 }}>
                 <div key={index}>
                   <div>{diary.id}</div>
+                  <div>{diary.diary}</div>
                 </div>
               </Paper>
             );
@@ -59,11 +62,13 @@ function DiaryList() {
           {values.map((diary, index) => {
             return (
               // 既存のコンポーネント
-              <Paper sx={{ padding: 2 }}>
-                <div key={index}>
-                  <div>{diary.id}</div>
-                </div>
-              </Paper>
+              <Stack>
+                <Paper sx={{ padding: 2 }}>
+                  <div key={index}>
+                    <div>{diary.id}</div>
+                  </div>
+                </Paper>
+              </Stack>
             );
           })}
         </>
