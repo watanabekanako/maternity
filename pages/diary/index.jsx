@@ -31,6 +31,9 @@ export default function DiaryPage() {
   // ページング機能
   const handlePrevPage = () => {};
   const handleNextPage = () => {};
+
+  //検索機能
+
   return (
     <>
       <DefaultLayout>

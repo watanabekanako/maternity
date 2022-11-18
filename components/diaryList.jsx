@@ -18,6 +18,8 @@ import {
 import { useAuthState } from 'react-firebase-hooks/auth';
 import moment from 'moment';
 import { Stack } from '@mui/system';
+import TextField from '@mui/material/TextField';
+import { useState, useEffect } from 'react';
 function DiaryList() {
   // ログインした状態にて取得したい
   const [user, loadingUser, errorUser] = useAuthState(auth);
@@ -31,12 +33,49 @@ function DiaryList() {
     ).withConverter(withIDConverter)
   );
   console.log(values);
+  // if (loading) {
+  //   return <>loading...</>;
+  // }
+
+  // 検索機能
+  // const products = [
+  //   'aaaaaaa',
+  //   'bbbbbbb',
+
+  // ];
+
+  // const [keyword, setKeyword] = useState('');
+  // const [showList, setShowList] = useState(false);
+  // const [filteredProducts, setFilteredProducts] = useState(products);
+  // useEffect(() => {
+  //   if (keyword === '') {
+  //     setFilteredProducts(products);
+  //   }
+
+  //   const searchKeyWords = keyword
+  //     .trim()
+  //     .toLowerCase()
+  //     .match(/[^\s]+/g);
+
+  //   if (searchKeyWords === null) {
+  //     setFilteredProducts(products);
+  //     return;
+  //   }
+  // });
   if (loading) {
     return <>loading...</>;
   }
 
   return (
     <>
+      {/* <TextField
+        id="field"
+        color="secondary"
+        variant="outlined"
+        label="enter keywords"
+        onChange={(e) => setKeyword(e.target.value)}
+        onClick={() => setShowList(true)}
+      /> */}
       {values && values?.length > 0 ? (
         // データがある時
         <>
