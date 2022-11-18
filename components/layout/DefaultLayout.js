@@ -17,7 +17,8 @@ import MuiLink from '@mui/material/Link';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-
+import { Grid } from '@mui/material';
+import Image from 'next/image';
 function DefaultLayout({ children, style }) {
   const [user] = useAuthState(auth);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -211,7 +212,16 @@ function DefaultLayout({ children, style }) {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container maxWidth="md">{children}</Container>
+      <Container maxWidth="lg">
+        <Grid container spacing={2}>
+          <Grid item xs={10}>
+            {children}
+          </Grid>
+          <Grid item xs={2}>
+            <Image src="/img/diary.png" width={500} height={500} />
+          </Grid>
+        </Grid>
+      </Container>
     </React.Fragment>
   );
 }
