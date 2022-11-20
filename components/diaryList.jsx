@@ -41,7 +41,7 @@ function DiaryList() {
   // values.lengthで件数の取得;
   // 検索機能
   // const products = [
-  //   'aaaaaaa',
+  //   'aaaaaa',
   //   'bbbbbbb',
 
   // ];

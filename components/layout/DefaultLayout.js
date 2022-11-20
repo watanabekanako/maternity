@@ -218,11 +218,7 @@ function DefaultLayout({ children, style }) {
             {children}
           </Grid>
           <Grid item xs={2}>
-            <Image
-              src="/img/hanaguruma.jpg"
-              width={500}
-              height={500}
-            />
+            <Image src="/img/diary.png" width={500} height={500} />
           </Grid>
         </Grid>
       </Container>

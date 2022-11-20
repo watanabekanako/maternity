@@ -67,10 +67,11 @@ export default function WeightEdit({ onClickSave }) {
             setWeight(Number(e.target.value));
           }}
         />
-
-        <Button variant="contained" onClick={() => onClickCreate()}>
-          保存
-        </Button>
+        <div>
+          <Button variant="contained" onClick={() => onClickCreate()}>
+            保存
+          </Button>
+        </div>
       </Stack>
     </Box>
 
