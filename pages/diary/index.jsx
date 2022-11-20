@@ -29,10 +29,7 @@ export default function DiaryPage() {
     setOpen(false);
   };
   // ページング機能
-  const handlePrevPage = () => {};
-  const handleNextPage = () => {};
-
-  //検索機能
+  const handleChange = (page) => {};
 
   return (
     <>
@@ -68,7 +65,11 @@ export default function DiaryPage() {
               <DiaryEdit onClickSave={handleClose} />
             </Box>
           </Modal>
-          <Pagination count={10} per={10} />
+          <Pagination
+            count={10}
+            per={10}
+            onChange={(e) => handleChange(e.page)}
+          />
         </Box>
       </DefaultLayout>
     </>

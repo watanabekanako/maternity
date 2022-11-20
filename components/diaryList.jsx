@@ -32,11 +32,13 @@ function DiaryList() {
       'diary'
     ).withConverter(withIDConverter)
   );
-  console.log(values);
+  console.log(values.length);
   // if (loading) {
   //   return <>loading...</>;
   // }
-
+  // ページング機能
+  // firestoreのdaysコレクションの件数と取得
+  // values.lengthで件数の取得;
   // 検索機能
   // const products = [
   //   'aaaaaaa',
