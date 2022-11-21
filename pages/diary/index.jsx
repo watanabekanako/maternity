@@ -1,6 +1,6 @@
 import React from 'react';
 import DiaryList from '../../components/diaryList';
-import DiaryEdit from '../../components/DiaryEdit';
+import DiaryEditModal from '../../components/DiaryEditModal';
 import Head from 'next/head';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import { Box, Modal } from '@mui/material';
@@ -9,17 +9,6 @@ import NoteAltIcon from '@mui/icons-material/NoteAlt';
 import Pagination from '@mui/material/Pagination';
 import Link from 'next/link';
 export default function DiaryPage() {
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
   const [open, setOpen] = React.useState(false);
   // モーダル
   const handleOpen = () => {
@@ -55,16 +44,11 @@ export default function DiaryPage() {
           >
             日記を登録する
           </Button>
-          <Modal
+          <DiaryEditModal
             open={open}
             onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <DiaryEdit onClickSave={handleClose} />
-            </Box>
-          </Modal>
+            description={"日付と今日の体調や出来事を記入してね！"}
+          />
           <Pagination
             count={10}
             per={10}
