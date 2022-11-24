@@ -15,10 +15,17 @@ import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import { ReviewsSharp } from '@mui/icons-material';
+import { formatMuiErrorMessage } from '@mui/utils';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 const Login = () => {
   const router = useRouter();
-  const [formValues, setFormValues] = React.useState({});
+  const initialValues = {
+    mailAddress: '',
+    password: '',
+  };
 
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
   const [
     signInWithEmailAndPassword,
     // ログインして返ってきたユーザーの情報
@@ -27,37 +34,60 @@ const Login = () => {
     error,
   ] = useSignInWithEmailAndPassword(auth);
 
-  const handleLogin = async () => {
-    // 必要に応じてバリデーション
-
-    // ログイン処理
-    await signInWithEmailAndPassword(
-      formValues.mailAddress,
-      formValues.password
-    );
-  };
-  // const handleChange = (prop) => (event) => {
-  //   setValues({ ...values, [prop]: event.target.value });
-  // };
-
   React.useEffect(() => {
     // ユーザーがある = ログインできた時の処理
     if (user) {
       router.push('/baby');
     }
   }, [user]);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    // 必要に応じてバリデーション
+    const errors = validate(formValues);
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+    } else {
+      // ログイン処理
+      await signInWithEmailAndPassword(
+        formValues.mailAddress,
+        formValues.password
+      );
+    }
+  };
+  // const handleChange = (prop) => (event) => {
+  //   setValues({ ...values, [prop]: event.target.value });
+  // };
+  // バリデーションチェック
+  const validate = (values) => {
+    const errors = {};
+    // メールアドレスの検証
+    const regex = new RegExp(
+      /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/
+    );
+    if (!values.mailAddress) {
+      errors.mailAddress = 'メールアドレスを入力してください';
+    } else if (!regex.test(values.mailAddress)) {
+      errors.mailAddress = 'メールアドレスのフォーマットが不正です';
+    }
+    if (!values.password) {
+      errors.password = 'パスワードを入力してください';
+    } else if (values.password.length < 8) {
+      errors.password = 'パスワードは8文字以上で入力して下さい';
+    }
+    return errors;
+  };
 
   // パスワードを表示するかどうか
-  const [isRevealPassword, setIsRevealPassword] = useState(false);
+  const [isRevealPassword, setIsRevealPassword] = useState(true);
 
+  const handleMouseDownPassword = (event) => {
+    //マウスダウンしたときの挙動制御
+    event.preventDefault();
+  };
   const handleClickShowPassword = () => {
     // 目隠しボタンをクリックした時の処理
     // set関数の引数には更新したい状態を渡す
     setIsRevealPassword(!isRevealPassword);
-  };
-  const handleMouseDownPassword = (event) => {
-    //マウスダウンしたときの挙動制御
-    event.preventDefault();
   };
   return (
     <DefaultLayout>
@@ -65,6 +95,8 @@ const Login = () => {
         <h1>ログインページ</h1>
         <div>
           <TextField
+            error={formErrors.mailAddress}
+            helperText={formErrors.mailAddress}
             id="outlined-basic"
             label="Email"
             variant="outlined"
@@ -80,11 +112,34 @@ const Login = () => {
           />
         </div>
         <div>
-          <FormControl sx={{ width: 600, margin: 10 }}>
+          <TextField
+            error={formErrors.password}
+            helperText={formErrors.password}
+            id="outlined-basic"
+            label="パスワード"
+            variant="outlined"
+            margin="dense"
+            name="password"
+            sx={{ width: 600, marginBottom: 5 }}
+            value={formValues.password}
+            // パスワードを目隠しする
+            type={isRevealPassword ? 'text' : 'password'}
+            onChange={(e) => {
+              setFormValues({
+                ...formValues,
+                password: e.target.value,
+              });
+            }}
+          />
+        </div>
+        <div>
+          <FormControl>
             <InputLabel htmlFor="outlined-adornment-password">
-              Password
+              パスワード
             </InputLabel>
             <OutlinedInput
+              error={formErrors.password}
+              helperText={formErrors.password}
               id="outlined-adornment-password"
               label="パスワード"
               margin="dense"
