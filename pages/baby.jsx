@@ -46,38 +46,29 @@ const Baby = () => {
   // console.log(moment.unix(values.birthDate.seconds));
   // console.log(data);
   // const moment = require('moment');
+  const m1 = moment.unix(values?.birthDate.seconds);
+
+  const m2 = moment();
+
+  const diffDays = m1.diff(m2, 'days');
+  const diffMonths = m1.diff(m2, 'month');
 
   const [
     valuesMessage,
     loadingMessage,
     errorMessage,
     snapshotMessage,
-  ] = useCollectionData(
-    collection(db, 'message').withConverter(withIDConverter)
+  ] = useDocumentData(
+    collection(db, 'message', String(diffMonths)).withConverter(
+      withIDConverter
+    )
   );
-
   console.log(valuesMessage);
-  console.log(loading);
+  // console.log(loading);
   // どちらかがtrueだったらloadingを返す
   if (loading || loadingMessage) {
     return <>loading...</>;
   }
-
-  const m1 = moment.unix(values?.birthDate.seconds);
-
-  const m2 = moment();
-  const diff = m1.diff(m2, 'days');
-  console.log(values);
-
-  // ママへのメッセージ
-  // 残りの日数diffの条件分岐
-  // 100日以下
-  // 50日以下
-  // const message = () => {
-  //   if (diff < 50) {
-  //     return { valuesMessage.message };
-  //   }
-  // };
 
   return (
     <React.Fragment>
@@ -106,12 +97,12 @@ const Baby = () => {
               sx={{ color: '#E4AF9B' }}
               component={'span'}
             >
-              {diff}
+              {diffDays}
             </Typography>
             日
           </h1>
           <Typography>ママへのメッセージ</Typography>
-          <p></p>
+          <p>{valuesMessage.message}</p>
         </Box>
       </DefaultLayout>
     </React.Fragment>
