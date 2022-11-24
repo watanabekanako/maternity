@@ -59,11 +59,12 @@ const Baby = () => {
     errorMessage,
     snapshotMessage,
   ] = useDocumentData(
-    collection(db, 'message', String(diffMonths)).withConverter(
+    doc(db, 'message', String(diffMonths)).withConverter(
       withIDConverter
     )
   );
-  console.log(valuesMessage);
+  // console.log(valuesMessage);
+  // console.log(diffMonths);
   // console.log(loading);
   // どちらかがtrueだったらloadingを返す
   if (loading || loadingMessage) {
@@ -102,7 +103,7 @@ const Baby = () => {
             日
           </h1>
           <Typography>ママへのメッセージ</Typography>
-          <p>{valuesMessage.message}</p>
+          <p>{valuesMessage}</p>
         </Box>
       </DefaultLayout>
     </React.Fragment>
