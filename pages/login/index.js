@@ -136,7 +136,7 @@ const Login = () => {
           />
         </div> */}
         <div>
-          <FormControl>
+          <FormControl sx={{ width: 600 }}>
             <InputLabel htmlFor="outlined-adornment-password">
               Password
             </InputLabel>
@@ -162,7 +162,7 @@ const Login = () => {
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {formValues.showPassword ? (
+                    {isRevealPassword ? (
                       <VisibilityOff />
                     ) : (
                       <Visibility />
