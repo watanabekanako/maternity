@@ -37,7 +37,9 @@ function DefaultLayout({ children, style }) {
         { label: 'Login', href: '/login' },
         { label: '新規会員登録', href: '/register' },
       ];
-  const settings = ['Account', 'Logout'];
+
+  const settings = user ? ['Account', 'Logout'] : [];
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -175,10 +177,13 @@ function DefaultLayout({ children, style }) {
                   onClick={handleOpenUserMenu}
                   sx={{ p: 0 }}
                 >
-                  <Avatar
-                    alt="account"
-                    // src="/static/images/avatar/2.jpg"
-                  />
+                  {/* ユーザーが登録されているときのみ表示 */}
+                  {user && (
+                    <Avatar
+                      alt="account"
+                      // src="/static/images/avatar/2.jpg"
+                    />
+                  )}
                 </IconButton>
               </Tooltip>
               <Menu
@@ -217,8 +222,12 @@ function DefaultLayout({ children, style }) {
           <Grid item xs={10}>
             {children}
           </Grid>
-          <Grid item xs={2}>
-            <Image src="/img/diary.png" width={500} height={500} />
+          <Grid item xs={2} sx={{ marginTop: 20 }}>
+            <Image
+              src="/img/bnr_jex220425.jpeg"
+              width={300}
+              height={99}
+            />
           </Grid>
         </Grid>
       </Container>
