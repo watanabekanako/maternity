@@ -7,16 +7,17 @@ import { auth } from '../../firebase';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Box } from '@mui/system';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
+import FormHelperText from '@mui/material/FormHelperText';
 import { ReviewsSharp } from '@mui/icons-material';
 import { formatMuiErrorMessage } from '@mui/utils';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 const Login = () => {
   const router = useRouter();
   const initialValues = {
@@ -78,7 +79,7 @@ const Login = () => {
   };
 
   // パスワードを表示するかどうか
-  const [isRevealPassword, setIsRevealPassword] = useState(true);
+  const [isRevealPassword, setIsRevealPassword] = useState(false);
 
   const handleMouseDownPassword = (event) => {
     //マウスダウンしたときの挙動制御
@@ -86,9 +87,11 @@ const Login = () => {
   };
   const handleClickShowPassword = () => {
     // 目隠しボタンをクリックした時の処理
+
     // set関数の引数には更新したい状態を渡す
     setIsRevealPassword(!isRevealPassword);
   };
+
   return (
     <DefaultLayout>
       <Box textAlign="center">
@@ -111,7 +114,7 @@ const Login = () => {
             }}
           />
         </div>
-        <div>
+        {/* <div>
           <TextField
             error={formErrors.password}
             helperText={formErrors.password}
@@ -131,15 +134,14 @@ const Login = () => {
               });
             }}
           />
-        </div>
+        </div> */}
         <div>
           <FormControl>
             <InputLabel htmlFor="outlined-adornment-password">
-              パスワード
+              Password
             </InputLabel>
             <OutlinedInput
               error={formErrors.password}
-              helperText={formErrors.password}
               id="outlined-adornment-password"
               label="パスワード"
               margin="dense"
@@ -161,14 +163,19 @@ const Login = () => {
                     edge="end"
                   >
                     {formValues.showPassword ? (
-                      <VisibilityOffIcon />
+                      <VisibilityOff />
                     ) : (
-                      <VisibilityIcon />
+                      <Visibility />
                     )}
                   </IconButton>
                 </InputAdornment>
               }
             />
+            {formErrors.password && (
+              <FormHelperText error>
+                {formErrors.password}
+              </FormHelperText>
+            )}
           </FormControl>
         </div>
         <Button variant="contained" onClick={handleLogin}>
