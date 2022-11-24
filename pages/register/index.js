@@ -10,7 +10,14 @@ import { doc, setDoc } from 'firebase/firestore';
 import moment from 'moment';
 import { DatePicker } from '@mui/x-date-pickers';
 import { Box } from '@mui/material';
-
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 const Register = () => {
   const router = useRouter();
   const initialValues = {
@@ -19,7 +26,7 @@ const Register = () => {
     password: '',
     birthDate: '',
   };
-  const [formValues, setFormvalues] = useState(initialValues);
+  const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
@@ -27,7 +34,7 @@ const Register = () => {
     // console.log(e.target.value);
 
     const { name, value } = e.target;
-    setFormvalues({ ...formValues, [name]: value });
+    setFormValues({ ...formValues, [name]: value });
     console.log(formValues);
   };
 
@@ -115,7 +122,14 @@ const Register = () => {
   //   /^[a-zA-Z0-9_+-]+(.[a-zA-Z0-9_+-]+)*@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
 
   // const submit = () => {};
-
+  const handleMouseDownPassword = (event) => {
+    //マウスダウンしたときの挙動制御
+    event.preventDefault();
+  };
+  const handleClickShowPassword = () => {
+    // set関数の引数には更新したい状態を渡す
+    setIsRevealPassword(!isRevealPassword);
+  };
   const [isRevealPassword, setIsRevealPassword] = useState(false);
 
   return (
@@ -135,7 +149,7 @@ const Register = () => {
               sx={{ width: 600, marginBottom: 5 }}
               value={formValues.username}
               onChange={(e) => {
-                setFormvalues({
+                setFormValues({
                   ...formValues,
                   username: e.target.value,
                 });
@@ -154,33 +168,56 @@ const Register = () => {
               sx={{ width: 600, marginBottom: 5 }}
               value={formValues.mailAddress}
               onChange={(e) => {
-                setFormvalues({
+                setFormValues({
                   ...formValues,
                   mailAddress: e.target.value,
                 });
               }}
             />
           </div>
+
           <div>
-            <TextField
-              error={formErrors.password}
-              helperText={formErrors.password}
-              id="outlined-basic"
-              label="パスワード"
-              variant="outlined"
-              margin="dense"
-              name="password"
-              sx={{ width: 600, marginBottom: 5 }}
-              value={formValues.password}
-              // パスワードを目隠しする
-              type={isRevealPassword ? 'text' : 'password'}
-              onChange={(e) => {
-                setFormvalues({
-                  ...formValues,
-                  password: e.target.value,
-                });
-              }}
-            />
+            <FormControl sx={{ width: 600, margin: 6 }}>
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                error={formErrors.password}
+                id="outlined-adornment-password"
+                label="パスワード"
+                margin="dense"
+                // 見せる時はテキスト、見せないときはパスワード
+                type={isRevealPassword ? 'text' : 'password'}
+                value={formValues.password}
+                onChange={(e) => {
+                  setFormValues({
+                    ...formValues,
+                    password: e.target.value,
+                  });
+                }}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {!isRevealPassword ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+              {formErrors.password && (
+                <FormHelperText error>
+                  {formErrors.password}
+                </FormHelperText>
+              )}
+            </FormControl>
           </div>
           <div>
             <DatePicker
@@ -193,13 +230,13 @@ const Register = () => {
               margin="dense"
               value={formValues.birthDate}
               // onChange={(e) => {
-              //   setFormvalues({
+              //   setFormValues({
               //     ...formValues,
               //     birthDate: e.target.value,
               //   });
               // }}
               onChange={(newValues) => {
-                setFormvalues({
+                setFormValues({
                   ...formValues,
                   birthDate: newValues.format('YYYY/MM/DD'),
                 });

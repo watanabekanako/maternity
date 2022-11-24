@@ -86,8 +86,6 @@ const Login = () => {
     event.preventDefault();
   };
   const handleClickShowPassword = () => {
-    // 目隠しボタンをクリックした時の処理
-
     // set関数の引数には更新したい状態を渡す
     setIsRevealPassword(!isRevealPassword);
   };
@@ -114,29 +112,8 @@ const Login = () => {
             }}
           />
         </div>
-        {/* <div>
-          <TextField
-            error={formErrors.password}
-            helperText={formErrors.password}
-            id="outlined-basic"
-            label="パスワード"
-            variant="outlined"
-            margin="dense"
-            name="password"
-            sx={{ width: 600, marginBottom: 5 }}
-            value={formValues.password}
-            // パスワードを目隠しする
-            type={isRevealPassword ? 'text' : 'password'}
-            onChange={(e) => {
-              setFormValues({
-                ...formValues,
-                password: e.target.value,
-              });
-            }}
-          />
-        </div> */}
         <div>
-          <FormControl sx={{ width: 600 }}>
+          <FormControl sx={{ width: 600, margin: 6 }}>
             <InputLabel htmlFor="outlined-adornment-password">
               Password
             </InputLabel>
@@ -162,7 +139,7 @@ const Login = () => {
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {isRevealPassword ? (
+                    {!isRevealPassword ? (
                       <VisibilityOff />
                     ) : (
                       <Visibility />
