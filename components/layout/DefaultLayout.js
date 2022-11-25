@@ -54,16 +54,15 @@ function DefaultLayout({ children, style }) {
     setAnchorElNav(null);
   };
 
+  const router = useRouter();
   const handleCloseUserMenu = (setting) => {
     if (setting === 'Logout') {
       // ログアウト処理
       signOut(auth);
     }
     if (setting === 'Account') {
-      const router = useRouter;
       router.push('/user/edit');
     }
-
     setAnchorElUser(null);
   };
 
@@ -224,20 +223,7 @@ function DefaultLayout({ children, style }) {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container maxWidth="lg">
-        <Grid container spacing={2}>
-          <Grid item xs={10}>
-            {children}
-          </Grid>
-          <Grid item xs={2} sx={{ marginTop: 20 }}>
-            <Image
-              src="/img/bnr_jex220425.jpeg"
-              width={300}
-              height={99}
-            />
-          </Grid>
-        </Grid>
-      </Container>
+      <Container maxWidth="lg">{children}</Container>
     </React.Fragment>
   );
 }
