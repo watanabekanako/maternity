@@ -92,12 +92,14 @@ const Edit = () => {
             margin="dense"
             name="username"
             sx={{ width: 600, marginBottom: 5 }}
-            value={values?.username}
+            // value={values?.username}
+            value={formValues?.username}
             onChange={(e) => {
               setFormValues({
                 ...formValues,
                 username: e.target.value,
               });
+              console.log(e.target.value);
             }}
           />
         </div>

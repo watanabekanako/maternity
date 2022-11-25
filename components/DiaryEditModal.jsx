@@ -1,16 +1,17 @@
 import Link from 'next/link';
 import DefaultLayout from './layout/DefaultLayout';
-import {doc, setDoc} from 'firebase/firestore';
-import {db} from '../firebase';
-import React, {useState} from 'react';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
+import React, { useState } from 'react';
 import moment from 'moment';
-import {Button, Stack, TextField, Modal} from '@mui/material';
-import {Box} from '@mui/system';
+import { Button, Stack, TextField, Modal } from '@mui/material';
+import { Box } from '@mui/system';
 import NoteAltIcon from '@mui/icons-material/NoteAlt';
-import {DatePicker} from '@mui/x-date-pickers';
-import {useAuthState} from 'react-firebase-hooks/auth';
-import {auth} from '../firebase';
-import {modalInnerBoxStyle} from "../definitions/style";
+import { DatePicker } from '@mui/x-date-pickers';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
+import { modalInnerBoxStyle } from '../definitions/style';
+import { BorderColor } from '@mui/icons-material';
 export default function DiaryEditModal({
   open,
   onClose,
@@ -31,7 +32,7 @@ export default function DiaryEditModal({
         date.format('YYYYMMDD')
       ),
       // 第二引数は保存するデータ(ここでは日記の内容)
-      {diary: diary}
+      { diary: diary }
     );
     onClose();
   };
@@ -53,7 +54,7 @@ export default function DiaryEditModal({
               // helperText={formErrors.birthDate}
               id="outlined-basic"
               label="日付"
-              sx={{width: 600}}
+              sx={{ width: 600 }}
               variant="outlined"
               margin="dense"
               value={date}
@@ -72,7 +73,10 @@ export default function DiaryEditModal({
               }}
             />
             <div>
-              <Button variant="contained" onClick={() => onClickCreate()}>
+              <Button
+                variant="contained"
+                onClick={() => onClickCreate()}
+              >
                 保存
               </Button>
             </div>

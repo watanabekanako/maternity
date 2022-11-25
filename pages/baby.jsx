@@ -13,7 +13,7 @@ import {
   useDocumentData,
 } from 'react-firebase-hooks/firestore';
 import { auth, db, withIDConverter } from '../firebase';
-
+import Paper from '@mui/material/Paper';
 import {
   doc,
   collection,
@@ -25,7 +25,7 @@ import {
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Box } from '@mui/system';
 
-import { Grid, Typography } from '@mui/material';
+import { Grid, Stack, Typography } from '@mui/material';
 import { Boy } from '@mui/icons-material';
 import { format } from 'path';
 // const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -76,19 +76,11 @@ const Baby = () => {
       <DefaultLayout style={{ border: 2 }}>
         <Box textAlign="center" margin={10}>
           <h1>today：{moment().format('YYYY/MM/DD')}</h1>
-          <Image src="/img/baby.png" width={500} height={500} />
-          {/* <Typography
-            variant="h4"
-            sx={{
-              border: 2,
-              padding: 4,
-              borderRadius: 14,
-              borderColor: '#E4AF9B',
-              padding: '40px',
-              // display: 'inline-block',
-            }}
-          > */}
-          <h1>
+
+          <Box>
+            <Image src="/img/baby.png" width={500} height={500} />
+          </Box>
+          <h2>
             <Typography variant="h4" sx={{ color: '#705040' }}>
               出産予定日まで
             </Typography>
@@ -101,9 +93,51 @@ const Baby = () => {
               {diffDays}
             </Typography>
             日
-          </h1>
-          <Typography>ママへのメッセージ</Typography>
-          <p>{valuesMessage?.message}</p>
+          </h2>
+
+          {/* <Typography
+            variant="h4"
+            sx={{
+              border: 2,
+              padding: 4,
+              borderRadius: 14,
+              borderColor: '#E4AF9B',
+              padding: '40px',
+              // display: 'inline-block',
+            }}
+          > */}
+          {/* <Box
+            sx={{
+              border: 4,
+              borderColor: '#E4AF9B7',
+              padding: 4,
+              borderRadius: 4,
+            }}
+          > */}
+          <Paper
+            elevation={3}
+            sx={{
+              padding: 4,
+              display: 'inline-block',
+              color: '#E4AF9B7',
+            }}
+          >
+            <Typography
+              className="ttlUnder"
+              variant="display: inline-block;"
+              sx={{ color: '#705040', fontSize: 30 }}
+            >
+              今月のママへのメッセージ
+            </Typography>
+            <Typography variant="p" sx={{ color: '#705040' }}>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: valuesMessage?.message,
+                }}
+              />
+            </Typography>
+            {/* </Box> */}
+          </Paper>
         </Box>
       </DefaultLayout>
     </React.Fragment>
