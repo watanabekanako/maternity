@@ -18,19 +18,26 @@ const Edit = () => {
     birthDate: '',
     username: '',
   };
+
   const [formValues, setFormvalues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
 
   const [values, loading, error, snapshot] = useDocumentData(
     doc(db, 'user', user?.uid ?? 'dummy')
   );
-
+  console.log(values.username);
   React.useEffect(() => {
     if (values?.birthDate) {
       setFormvalues({
         birthDate: moment
           .unix(values.birthDate.seconds)
           .format('YYYY/MM/DD'),
+      });
+    }
+
+    if (values?.username) {
+      setFormvalues({
+        username: values.username,
       });
     }
   }, [values?.birthDate]);
@@ -49,6 +56,7 @@ const Edit = () => {
         await setDoc(
           doc(db, 'user', user.uid),
           {
+            username: username,
             birthDate: moment(
               formValues.birthDate,
               'YYYY/MM/DD'
@@ -76,10 +84,27 @@ const Edit = () => {
       <h1>ユーザー情報編集</h1>
       <form>
         <div>
-          <TextField label="名前" />
+          <TextField
+            label="名前"
+            error={formErrors.username}
+            helperText={formErrors.username}
+            id="outlined-basic"
+            variant="outlined"
+            margin="dense"
+            name="username"
+            sx={{ width: 600, marginBottom: 5 }}
+            value={values.username}
+            onChange={(newValue) => {
+              setFormValues({
+                ...formValues,
+                username: newValue(e.target.value),
+              });
+            }}
+          />
         </div>
         <div>
           <DatePicker
+            sx={{ width: 600, marginBottom: 5 }}
             label="出産予定日"
             error={formErrors.birthDate}
             helperText={formErrors.birthDate}

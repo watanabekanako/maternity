@@ -19,6 +19,9 @@ import { auth } from '../../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Grid } from '@mui/material';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+
 function DefaultLayout({ children, style }) {
   const [user] = useAuthState(auth);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -55,6 +58,10 @@ function DefaultLayout({ children, style }) {
     if (setting === 'Logout') {
       // ログアウト処理
       signOut(auth);
+    }
+    if (setting === 'Account') {
+      const router = useRouter;
+      router.push('/user/edit');
     }
 
     setAnchorElUser(null);

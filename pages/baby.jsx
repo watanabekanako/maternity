@@ -63,7 +63,7 @@ const Baby = () => {
       withIDConverter
     )
   );
-  // console.log(valuesMessage);
+  console.log(valuesMessage);
   // console.log(diffMonths);
   // console.log(loading);
   // どちらかがtrueだったらloadingを返す
@@ -103,7 +103,7 @@ const Baby = () => {
             日
           </h1>
           <Typography>ママへのメッセージ</Typography>
-          <p>{valuesMessage}</p>
+          <p>{valuesMessage?.message}</p>
         </Box>
       </DefaultLayout>
     </React.Fragment>
