@@ -93,10 +93,10 @@ const Edit = () => {
             name="username"
             sx={{ width: 600, marginBottom: 5 }}
             value={values?.username}
-            onChange={(newNameValue) => {
+            onChange={(e) => {
               setFormValues({
                 ...formValues,
-                username: newNameValue,
+                username: e.target.value,
               });
             }}
           />
@@ -116,6 +116,7 @@ const Edit = () => {
                 ...formValues,
                 birthDate: newValue.format('YYYY/MM/DD'),
               });
+              console.log(newValue);
             }}
             renderInput={(params) => <TextField {...params} />}
           />
