@@ -19,7 +19,7 @@ const Edit = () => {
     username: '',
   };
 
-  const [formValues, setFormvalues] = useState(initialValues);
+  const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
 
   const [values, loading, error, snapshot] = useDocumentData(
@@ -28,7 +28,7 @@ const Edit = () => {
   // console.log(values.username);
   React.useEffect(() => {
     if (values?.birthDate) {
-      setFormvalues({
+      setFormValues({
         birthDate: moment
           .unix(values.birthDate.seconds)
           .format('YYYY/MM/DD'),
@@ -36,7 +36,7 @@ const Edit = () => {
     }
 
     if (values?.username) {
-      setFormvalues({
+      setFormValues({
         username: values.username,
       });
     }
@@ -56,7 +56,6 @@ const Edit = () => {
         await setDoc(
           doc(db, 'user', user.uid),
           {
-            username: username,
             birthDate: moment(
               formValues.birthDate,
               'YYYY/MM/DD'
@@ -94,10 +93,10 @@ const Edit = () => {
             name="username"
             sx={{ width: 600, marginBottom: 5 }}
             value={values?.username}
-            onChange={(newValue) => {
+            onChange={(newNameValue) => {
               setFormValues({
                 ...formValues,
-                username: newValue(e.target.value),
+                username: newNameValue,
               });
             }}
           />
@@ -113,7 +112,7 @@ const Edit = () => {
             margin="dense"
             value={moment(formValues.birthDate)}
             onChange={(newValue) => {
-              setFormvalues({
+              setFormValues({
                 ...formValues,
                 birthDate: newValue.format('YYYY/MM/DD'),
               });
