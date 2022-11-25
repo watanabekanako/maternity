@@ -25,7 +25,7 @@ const Edit = () => {
   const [values, loading, error, snapshot] = useDocumentData(
     doc(db, 'user', user?.uid ?? 'dummy')
   );
-  console.log(values.username);
+  // console.log(values.username);
   React.useEffect(() => {
     if (values?.birthDate) {
       setFormvalues({
@@ -93,7 +93,7 @@ const Edit = () => {
             margin="dense"
             name="username"
             sx={{ width: 600, marginBottom: 5 }}
-            value={values.username}
+            value={values?.username}
             onChange={(newValue) => {
               setFormValues({
                 ...formValues,
