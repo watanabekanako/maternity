@@ -27,20 +27,17 @@ const Edit = () => {
   );
   // console.log(values.username);
   React.useEffect(() => {
-    if (values?.birthDate) {
+    if (values?.birthDate || values?.username) {
       setFormValues({
+        ...formValues,
         birthDate: moment
           .unix(values.birthDate.seconds)
           .format('YYYY/MM/DD'),
-      });
-    }
-
-    if (values?.username) {
-      setFormValues({
         username: values.username,
       });
     }
   }, [values?.birthDate]);
+  // values.birthDateの中身が変わったら実行する
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,6 +57,7 @@ const Edit = () => {
               formValues.birthDate,
               'YYYY/MM/DD'
             ).toDate(),
+            username: formValues.username,
           },
           {
             merge: true,
@@ -112,13 +110,12 @@ const Edit = () => {
             id="outlined-basic"
             variant="outlined"
             margin="dense"
-            value={moment(formValues.birthDate)}
+            value={moment(formValues.birthDate, 'YYYY/MM/DD')}
             onChange={(newValue) => {
               setFormValues({
                 ...formValues,
                 birthDate: newValue.format('YYYY/MM/DD'),
               });
-              console.log(newValue);
             }}
             renderInput={(params) => <TextField {...params} />}
           />
