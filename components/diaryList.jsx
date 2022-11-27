@@ -14,6 +14,7 @@ import {
   orderBy,
   where,
   documentId,
+  startAt,
 } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import moment from 'moment';
@@ -25,14 +26,19 @@ function DiaryList() {
   const [user, loadingUser, errorUser] = useAuthState(auth);
   // useCollectionDataにて複数のドキュメントを取得する
   const [values, loading, error, snapshot] = useCollectionData(
-    collection(
-      db,
-      'user',
-      user?.uid ?? 'dummy',
-      'diary'
-    ).withConverter(withIDConverter)
+    query(
+      collection(
+        db,
+        'user',
+        user?.uid ?? 'dummy',
+        'diary'
+      ).withConverter(withIDConverter),
+
+      startAt(page - 1 * per + 1),
+      limit(per)
+    )
   );
-  console.log(values.length);
+
   // if (loading) {
   //   return <>loading...</>;
   // }

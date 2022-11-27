@@ -18,6 +18,11 @@ import {
 } from 'firebase/firestore';
 import { Button } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Typography from '@mui/material/Typography';
 function QuestionList() {
   // const fetcher = (url) => fetch(url).then((res) => res.json());
   // const { data, error } = useSWR(
@@ -47,22 +52,24 @@ function QuestionList() {
         // console.log(values);
         return (
           <>
-            <Paper elevation={3} sx={{ padding: 2, margin: 4 }}>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
+            <Accordion sx={{ marginBottom: 6 }}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
               >
-                <div key={index}>
-                  <Link href={`question/${question.id}`}>
-                    <a>
-                      <div>{question.query}</div>
-                    </a>
-                  </Link>
-                </div>
-                <ArrowForwardIosIcon />
-              </Stack>
-            </Paper>
+                <Typography>
+                  <div key={index}>
+                    <div>{question.query}</div>
+                  </div>
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  <div>{question.answer}</div>
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
           </>
         );
       })}

@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import DiaryCalenderModal from '../../components/layout/DiaryCalenderModal';
 import Modal from '@mui/material/Modal';
 const MyApp = () => {
-  const [open, setOpen] = React.useState(false);
+  const [selectedDate, setSelectedDate] = React.useState();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -29,7 +29,7 @@ const MyApp = () => {
             }}
           />
           <Modal
-            open={open}
+            open={selectedDate}
             // このopenにonClickDay渡す?
             onClose={handleClose}
             aria-labelledby="modal-modal-title"

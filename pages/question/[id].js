@@ -14,7 +14,7 @@ import {
 } from 'firebase/firestore';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import Link from 'next/link';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 export default function Question() {
   const router = useRouter();
   const { id } = router.query;
@@ -44,16 +44,21 @@ export default function Question() {
   return (
     <DefaultLayout>
       <Box textAlign="center">
-        <Typography variant="h4" sx={{ margin: 4 }}>
-          {values.query}
-        </Typography>
+        <Paper>
+          <Typography variant="h4" sx={{ margin: 4 }}>
+            {values.query}
+          </Typography>
+        </Paper>
         {/* values.xxxはfirestoreで登録したフィールド */}
         {/* {values.test} */}
-        <Typography variant="h5" sx={{ margin: 2 }}>
-          {values.answer}
-        </Typography>
+        <Paper>
+          <Typography variant="h5" sx={{ margin: 2 }}>
+            <div
+              dangerouslySetInnerHTML={{ __html: values.answer }}
+            />
+          </Typography>
+        </Paper>
       </Box>
-
       <Box textAlign="center">
         <Link href="/question" passHref>
           <Button variant="contained" to="/">
