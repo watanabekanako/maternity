@@ -30,7 +30,7 @@ function DefaultLayout({ children, style }) {
     ? [
         { label: 'Top', href: '/' },
         { label: 'Baby', href: '/baby' },
-        { label: 'Diary', href: '/diary' },
+        { label: 'Diary', href: '/diaryCalender' },
         { label: 'Weight', href: '/weight' },
         { label: 'Q&A', href: '/question' },
       ]

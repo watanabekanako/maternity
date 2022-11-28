@@ -177,7 +177,7 @@ const Register = () => {
           </div>
 
           <div>
-            <FormControl sx={{ width: 600, margin: 6 }}>
+            <FormControl sx={{ width: 600, marginBottom: 5 }}>
               <InputLabel htmlFor="outlined-adornment-password">
                 Password
               </InputLabel>
@@ -241,7 +241,9 @@ const Register = () => {
                   birthDate: newValues.format('YYYY/MM/DD'),
                 });
               }}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => (
+                <TextField sx={{ width: 600 }} {...params} />
+              )}
             />
           </div>
           <Button
@@ -249,6 +251,7 @@ const Register = () => {
             variant="contained"
             onClick={handleSubmit}
             size="large"
+            sx={{ marginTop: 4 }}
           >
             登録
           </Button>

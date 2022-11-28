@@ -44,15 +44,13 @@ export default function Question() {
   return (
     <DefaultLayout>
       <Box textAlign="center">
-        <Paper>
-          <Typography variant="h4" sx={{ margin: 4 }}>
-            {values.query}
-          </Typography>
+        <Paper sx={{ margin: 10 }}>
+          <h2 className="ttlUnder">{values.query}</h2>
         </Paper>
         {/* values.xxxはfirestoreで登録したフィールド */}
         {/* {values.test} */}
-        <Paper>
-          <Typography variant="h5" sx={{ margin: 2 }}>
+        <Paper sx={{ margin: 10 }}>
+          <Typography className="textQuestion" variant="p">
             <div
               dangerouslySetInnerHTML={{ __html: values.answer }}
             />

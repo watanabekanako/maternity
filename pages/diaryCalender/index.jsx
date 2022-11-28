@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import 'react-calendar/dist/Calendar.css';
@@ -12,62 +12,144 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, db } from '../../firebase';
+import { useDocumentData } from 'react-firebase-hooks/firestore';
+import { doc, collection, setDoc } from 'firebase/firestore';
+import moment from 'moment';
+import { Skeleton, Typography } from '@mui/material';
 const MyApp = () => {
-  // const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
-
-  // useStateになにもわたさないとundefind(=未定義)が初期値になる
   const [selectedValue, setSelectedValue] = useState();
+  const [user, loadingUser, errorUser] = useAuthState(auth);
+  // 更新中の日記の値
+  const [diary, setDiary] = useState();
+  // 編集中かどうか
+  const [editing, setEditing] = useState(false);
 
-  // console.log(value);
-  // const handleClose = () => onClose(selectedValue);
-  console.log(selectedValue);
+  const [values, loading, error, snapshot] = useDocumentData(
+    doc(
+      db,
+      'user',
+      user?.uid ?? 'dummy',
+      'diary',
+      moment(selectedValue).format('YYYYMMDD')
+    )
+  );
 
   // ダイアログ開閉
   const handleClose = () => {
+    setDiary(undefined);
     setSelectedValue(undefined);
   };
+  // console.log(values);
+  // console.log(user.uid);
+  console.log(moment(selectedValue).format('YYYYMMDD'));
+  // useStateになにもわたさないとundefind(=未定義)が初期値になる
+
+  // console.log(value);
+  // const handleClose = () => onClose(selectedValue);
+
+  // console.log(`selectedValue; ${selectedValue}`);
+  // console.log('selectedValue', selectedValue);
+
+  useEffect(() => {
+    if (values?.diary) {
+      setDiary(values.diary);
+    }
+  }, [values]);
   return (
     <>
       <DefaultLayout>
-        <div>
-          <h1>カレンダー</h1>
-          <Calendar
-            // onChange={onChange}
-            value={selectedValue}
-            onClickDay={(value, event) => {
-              setSelectedValue(value);
-            }}
-          />
-          {/* <Modal
-            open={selectedDate}
-            // このopenにonClickDay渡す?
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box></Box>
-          </Modal> */}
+        <Box textAlign="center">
+          <h1>日記カレンダー</h1>
+          <div className="diaryCalender">
+            <Calendar
+              sx={{ margin: 'Auto' }}
+              onClickDay={(value, event) => {
+                setSelectedValue(value);
+              }}
+            />
 
-          <Dialog onClose={handleClose} open={selectedValue}>
-            <DialogTitle>日付</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="text"
-                type="text"
-                fullWidth
-                variant="standard"
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>編集</Button>
-              <Button onClick={handleClose}>保存</Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-        <DiaryCalenderModal />
+            <Dialog onClose={handleClose} open={selectedValue}>
+              <DialogTitle>
+                日付:{moment(selectedValue)?.format('YYYY/MM/DD')}
+              </DialogTitle>
+              <DialogContent>
+                {loading ? (
+                  <Skeleton />
+                ) : (
+                  <>
+                    {editing ? (
+                      <TextField
+                        value={diary}
+                        placeholder={'まだ登録されていません。'}
+                        inChange={(e) => {
+                          setDiary(e.target.value);
+                        }}
+                        inputProps={{
+                          readOnly: !editing,
+                        }}
+                      />
+                    ) : (
+                      <Box>
+                        <Typography>{diary}</Typography>
+                      </Box>
+                    )}
+                    <Box
+                      value={diary}
+                      placeholder={'まだ登録されていません。'}
+                      inChange={(e) => {
+                        setDiary(e.target.value);
+                      }}
+                    />
+                    {editing ? (
+                      <Button
+                        sx={{ marginTOp: '4' }}
+                        onClick={() => {
+                          setEditing(false);
+                          setDoc(
+                            doc(db, 'user', user.uid),
+                            'diary',
+                            moment(selectedValue)?.format('YYYYMMDD'),
+                            {
+                              diary: diary,
+                            },
+                            {
+                              merge: true,
+                            }
+                          );
+                        }}
+                      >
+                        更新する
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => {
+                          setEditing(true);
+                        }}
+                      >
+                        編集する
+                      </Button>
+                    )}
+                  </>
+                )}
+
+                {/* <TextField
+                  autoFocus
+                  margin="dense"
+                  id="text"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                /> */}
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>閉じる</Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+          <DiaryCalenderModal />
+        </Box>
       </DefaultLayout>
     </>
   );

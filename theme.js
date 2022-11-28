@@ -20,6 +20,11 @@ const theme = createTheme({
         },
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: { Color: '#e4af9b' },
+      },
+    },
   },
 });
 

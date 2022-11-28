@@ -44,3 +44,10 @@ h1 {
     white 4px
   );
 }
+.textQuestion {
+  padding: 30px;
+}
+
+.diaryCalender {
+  margin: 0 auto;
+}

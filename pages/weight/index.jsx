@@ -155,7 +155,7 @@ const Graph = () => {
         <Box textAlign="center">
           <h1>
             体重管理
-            <MonitorWeightIcon fontSize="large" />
+            <MonitorWeightIcon fontSize="middle" />
           </h1>
           <Line options={options} data={data} />
           <Button variant="contained" onClick={handleOpen}>

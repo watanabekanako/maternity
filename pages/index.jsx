@@ -50,7 +50,7 @@ function ResponsiveAppBar() {
                     </Link>
                   ) : (
                     <Button variant="contained" to="/">
-                      会員登録すると見ることができます
+                      会員登録すると見れます
                     </Button>
                   )}
                 </Item>
@@ -74,7 +74,7 @@ function ResponsiveAppBar() {
                     </Link>
                   ) : (
                     <Button variant="contained" to="/">
-                      会員登録すると見ることができます
+                      会員登録すると見れます
                     </Button>
                   )}
                 </Item>
@@ -91,14 +91,14 @@ function ResponsiveAppBar() {
                     妊娠期間中の日記を登録することができます。日々の体調の変化など後から振り返ることができます。
                   </p>
                   {user ? (
-                    <Link href="diary" passHref>
+                    <Link href="diaryCalender" passHref>
                       <Button variant="contained" to="/">
                         確認する
                       </Button>
                     </Link>
                   ) : (
                     <Button variant="contained" to="/">
-                      会員登録すると見ることができます
+                      会員登録すると見れます
                     </Button>
                   )}
                 </Item>

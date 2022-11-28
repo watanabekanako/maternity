@@ -74,7 +74,7 @@ const Baby = () => {
   return (
     <React.Fragment>
       <DefaultLayout style={{ border: 2 }}>
-        <Box textAlign="center" margin={10}>
+        <Box textAlign="center" margin={4} marginBottom={20}>
           <h1>today：{moment().format('YYYY/MM/DD')}</h1>
 
           <Box>
