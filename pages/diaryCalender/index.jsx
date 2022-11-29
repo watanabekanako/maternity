@@ -50,12 +50,10 @@ const MyApp = () => {
   // const handleClose = () => onClose(selectedValue);
 
   // console.log(`selectedValue; ${selectedValue}`);
-  // console.log('selectedValue', selectedValue);
+  console.log('diary', diary);
 
   useEffect(() => {
-    if (values?.diary) {
-      setDiary(values.diary);
-    }
+    setDiary(values?.diary);
   }, [values]);
   return (
     <>
@@ -63,12 +61,21 @@ const MyApp = () => {
         <Box textAlign="center">
           <h1>日記カレンダー</h1>
           <div className="diaryCalender">
-            <Calendar
-              sx={{ margin: 'Auto' }}
-              onClickDay={(value, event) => {
-                setSelectedValue(value);
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
-            />
+            >
+              <Calendar
+                maxWidth={false}
+                sx={{ width: '600' }}
+                onClickDay={(value, event) => {
+                  setSelectedValue(value);
+                }}
+              />
+            </Box>
 
             <Dialog onClose={handleClose} open={selectedValue}>
               <DialogTitle>
@@ -83,7 +90,7 @@ const MyApp = () => {
                       <TextField
                         value={diary}
                         placeholder={'まだ登録されていません。'}
-                        inChange={(e) => {
+                        onChange={(e) => {
                           setDiary(e.target.value);
                         }}
                         inputProps={{
@@ -98,19 +105,25 @@ const MyApp = () => {
                     <Box
                       value={diary}
                       placeholder={'まだ登録されていません。'}
-                      inChange={(e) => {
+                      onChange={(e) => {
                         setDiary(e.target.value);
                       }}
                     />
                     {editing ? (
                       <Button
-                        sx={{ marginTOp: '4' }}
+                        sx={{ marginTop: '4' }}
                         onClick={() => {
                           setEditing(false);
                           setDoc(
-                            doc(db, 'user', user.uid),
-                            'diary',
-                            moment(selectedValue)?.format('YYYYMMDD'),
+                            doc(
+                              db,
+                              'user',
+                              user.uid,
+                              'diary',
+                              moment(selectedValue)?.format(
+                                'YYYYMMDD'
+                              )
+                            ),
                             {
                               diary: diary,
                             },
@@ -133,15 +146,6 @@ const MyApp = () => {
                     )}
                   </>
                 )}
-
-                {/* <TextField
-                  autoFocus
-                  margin="dense"
-                  id="text"
-                  type="text"
-                  fullWidth
-                  variant="standard"
-                /> */}
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>閉じる</Button>

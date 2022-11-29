@@ -33,7 +33,7 @@ function ResponsiveAppBar() {
             <Grid container spacing={4}>
               <Grid item xs={3}>
                 <Item>
-                  <h2>出産予定日ガイド</h2>
+                  <h2 className="ttlUnder">出産予定日ガイド</h2>
                   <Image
                     src="/img/diary.png"
                     width={500}
@@ -57,9 +57,9 @@ function ResponsiveAppBar() {
               </Grid>
               <Grid item xs={3}>
                 <Item>
-                  <h2>体重管理ガイド</h2>
+                  <h2 className="ttlUnder">体重管理ガイド</h2>
                   <Image
-                    src="/img/diary.png"
+                    src="/img/weight.png"
                     width={500}
                     height={500}
                   />
@@ -81,7 +81,7 @@ function ResponsiveAppBar() {
               </Grid>
               <Grid item xs={3}>
                 <Item>
-                  <h2>日記の記録</h2>
+                  <h2 className="ttlUnder">日記の記録</h2>
                   <Image
                     src="/img/diary.png"
                     width={500}
@@ -105,7 +105,7 @@ function ResponsiveAppBar() {
               </Grid>
               <Grid item xs={3}>
                 <Item>
-                  <h2>よくある質問</h2>
+                  <h2 className="ttlUnder">よくある質問</h2>
                   <Image
                     src="/img/diary.png"
                     width={500}

@@ -223,7 +223,9 @@ function DefaultLayout({ children, style }) {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container maxWidth="lg">{children}</Container>
+      <Container maxWidth="lg" sx={{ marginBottom: '100' }}>
+        {children}
+      </Container>
     </React.Fragment>
   );
 }

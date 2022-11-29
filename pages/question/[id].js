@@ -44,20 +44,37 @@ export default function Question() {
   return (
     <DefaultLayout>
       <Box textAlign="center">
-        <Paper sx={{ margin: 10 }}>
-          <h2 className="ttlUnder">{values.query}</h2>
+        <Paper sx={{ margin: 4 }}>
+          <Typography
+            className="ttlUnder"
+            sx={{
+              margin: 4,
+              color: '#705040',
+              fontSize: 30,
+            }}
+          >
+            Q,{values.query}
+          </Typography>
         </Paper>
         {/* values.xxxはfirestoreで登録したフィールド */}
         {/* {values.test} */}
-        <Paper sx={{ margin: 10 }}>
+        <Paper
+          sx={{
+            padding: 6,
+            margin: 4,
+            color: '#705040',
+            textAlign: 'left',
+          }}
+        >
           <Typography className="textQuestion" variant="p">
+            A.
             <div
               dangerouslySetInnerHTML={{ __html: values.answer }}
             />
           </Typography>
         </Paper>
       </Box>
-      <Box textAlign="center">
+      <Box textAlign="center" marginBottom={20}>
         <Link href="/question" passHref>
           <Button variant="contained" to="/">
             質問一覧へ戻る
@@ -67,60 +84,3 @@ export default function Question() {
     </DefaultLayout>
   );
 }
-// import { useState } from 'react';
-// import DefaultLayout from '../../components/layout/DefaultLayout';
-// export async function getStaticProps({ params }) {
-//   const res = await fetch(
-//     `http://localhost:8000/question/${params.id} `
-//   );
-//   const question = await res.json();
-
-//   return {
-//     props: {
-//       questions: question,
-//     },
-//   };
-// }
-
-// export async function getQuestionIds() {
-//   const questions = await fetch(
-//     'http://localhost:8000/question'
-//   ).then((res) => res.json());
-
-//   return questions.map((question) => {
-//     return {
-//       params: {
-//         id: question.id.toString(),
-//       },
-//     };
-//   });
-// }
-
-// export async function getStaticPaths() {
-//   const paths = await getQuestionIds();
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
-// export default function ItemCreate({ questions }) {
-//   const [descText, setDescText] = useState(questions.answer);
-//   const onChangeDescText = (event) => setDescText(event.target.value);
-
-//   return (
-//     <DefaultLayout>
-//       <div>
-//         <h1>質問詳細画面</h1>
-
-//         <textarea
-//           name="description"
-//           cols={40}
-//           rows={4}
-//           value={descText}
-//           onChange={onChangeDescText}
-//         ></textarea>
-//       </div>
-//     </DefaultLayout>
-//   );
-// }
