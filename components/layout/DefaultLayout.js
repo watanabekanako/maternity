@@ -16,19 +16,32 @@ import Link from 'next/link';
 import MuiLink from '@mui/material/Link';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
-const pages = [
-  { label: 'Baby', href: '/baby' },
-  { label: 'Diary', href: '/diary' },
-  { label: 'Weight', href: '/weight' },
-  // { label: 'Calender', href: '/calender' },
-  { label: 'Q&A', href: '/question' },
-  { label: 'Login', href: '/login' },
-];
-const settings = ['Account', 'Logout'];
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Grid } from '@mui/material';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 
 function DefaultLayout({ children, style }) {
+  const [user] = useAuthState(auth);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const pages = user
+    ? [
+        { label: 'Top', href: '/' },
+        { label: 'Baby', href: '/baby' },
+        { label: 'Diary', href: '/diaryCalender' },
+        { label: 'Weight', href: '/weight' },
+        { label: 'Q&A', href: '/question' },
+      ]
+    : [
+        { label: 'Top', href: '/' },
+        { label: 'Q&A', href: '/question' },
+        { label: 'Login', href: '/login' },
+        { label: '新規会員登録', href: '/register' },
+      ];
+
+  const settings = user ? ['Account', 'Logout'] : [];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -41,12 +54,15 @@ function DefaultLayout({ children, style }) {
     setAnchorElNav(null);
   };
 
+  const router = useRouter();
   const handleCloseUserMenu = (setting) => {
     if (setting === 'Logout') {
       // ログアウト処理
       signOut(auth);
     }
-
+    if (setting === 'Account') {
+      router.push('/user/edit');
+    }
     setAnchorElUser(null);
   };
 
@@ -72,7 +88,9 @@ function DefaultLayout({ children, style }) {
                 color: 'inherit',
                 textDecoration: 'none',
               }}
-            ></Typography>
+            >
+              mama＋
+            </Typography>
 
             <Box
               sx={{
@@ -122,9 +140,6 @@ function DefaultLayout({ children, style }) {
                 ))}
               </Menu>
             </Box>
-            <AdbIcon
-              sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}
-            />
             <Typography
               variant="h5"
               noWrap
@@ -141,7 +156,7 @@ function DefaultLayout({ children, style }) {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              mama＋
             </Typography>
             <Box
               sx={{
@@ -168,10 +183,13 @@ function DefaultLayout({ children, style }) {
                   onClick={handleOpenUserMenu}
                   sx={{ p: 0 }}
                 >
-                  <Avatar
-                    alt="Remy Sharp"
-                    src="/static/images/avatar/2.jpg"
-                  />
+                  {/* ユーザーが登録されているときのみ表示 */}
+                  {user && (
+                    <Avatar
+                      alt="account"
+                      // src="/static/images/avatar/2.jpg"
+                    />
+                  )}
                 </IconButton>
               </Tooltip>
               <Menu
@@ -205,7 +223,9 @@ function DefaultLayout({ children, style }) {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container maxWidth="md">{children}</Container>
+      <Container maxWidth="lg" sx={{ marginBottom: '100' }}>
+        {children}
+      </Container>
     </React.Fragment>
   );
 }

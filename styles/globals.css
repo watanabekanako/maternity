@@ -7,6 +7,7 @@ body {
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
   font-family: 'M PLUS 1p';
+  color: #705040;
 }
 
 a {
@@ -16,4 +17,40 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  /*線の種類（点線）2px 線色*/
+  border-bottom: dashed 4px #e4af9b;
+  display: inline-block;
+}
+.ttlUnder {
+  position: relative;
+  padding: 0.3em;
+  display: inline-block;
+}
+.ttlUnder:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 7px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #e4af9b,
+    #e4af9b 2px,
+    white 2px,
+    white 4px
+  );
+}
+.react-calendar {
+  max-width: 100%;
+  width: 1000px;
+  background: white;
+  border: 1px solid #a0a096;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+  line-height: 5.125em;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
+import WeightEdit from '../../components/WeightEdit';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import {
@@ -28,7 +29,6 @@ import {
 } from '@firebase/firestore';
 import { doc } from 'firebase/firestore';
 import moment from 'moment';
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -40,8 +40,25 @@ ChartJS.register(
 );
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Box } from '@mui/material';
-
+import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 const Graph = () => {
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const options = {
     responsive: true,
     plugins: {
@@ -72,14 +89,21 @@ const Graph = () => {
 
   // react-firebase-hooksの処理
 
+  // 2022/10/1
+  const first = moment().startOf('month');
+  // 2022/10/31
+  const end = moment().endOf('month');
+  // 上記の差 = 30
+  const diff = end.diff(first, 'days');
   // ログインしているユーザーの商法の取得
   const [user, LoadingUser, ErrorUser] = useAuthState(auth);
   const [values, loading, error, snapshot] = useCollectionData(
     query(
       // collection(db, 'user', '1', 'weight'),
       collection(db, 'user', user?.uid ?? 'dummy', 'weight'),
-      where(documentId(), '>=', '20221001'),
-      where(documentId(), '<=', '20221031'),
+      // グラフX軸のデータの取得条件
+      where(documentId(), '>=', first.format('YYYYMMDD')),
+      where(documentId(), '<=', end.format('YYYYMMDD')),
       orderBy(documentId(), 'asc')
     ).withConverter(withIDConverter)
   );
@@ -89,20 +113,15 @@ const Graph = () => {
     return <>Loading...</>;
   }
 
-  // 2022/10/1
-  const first = moment().startOf('month');
-  // 2022/10/31
-  const end = moment().endOf('month');
-  // 上記の差 = 30
-  const diff = end.diff(first, 'days');
-
   // [20221001, 20221002, ...., 20221031]を作りたい
-
+  const labelDisplayFormat = 'MM月DD日';
   const labels = new Array(diff + 1)
     // [undefined, undefined, ...., undefined]
     .fill(undefined)
     .map((_val, idx) => {
-      return moment(first).add(idx, 'days').format('YYYYMMDD');
+      return moment(first)
+        .add(idx, 'days')
+        .format(labelDisplayFormat);
     });
 
   const weightList = labels.map((date, index) => {
@@ -110,7 +129,11 @@ const Graph = () => {
     // if (index === false) {
     //   return values?.find((value) => value.id === date - 1)?.weight;
     // }
-    return values?.find((value) => value.id === date)?.weight;
+
+    return values?.find(
+      // idをYYYYMMDDからMMDDへ文字列へ変換して、labelsと比較する
+      (value) => moment(value.id).format(labelDisplayFormat) === date
+    )?.weight;
   });
 
   const data = {
@@ -119,8 +142,8 @@ const Graph = () => {
       {
         label: '体重',
         data: weightList,
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: '#E4AF9B',
+        backgroundColor: '#E4AF9B',
         spanGaps: true,
       },
     ],
@@ -130,13 +153,24 @@ const Graph = () => {
     <>
       <DefaultLayout style={{}}>
         <Box textAlign="center">
-          <h1>体重管理</h1>
+          <h1>
+            体重管理
+            <MonitorWeightIcon fontSize="middle" />
+          </h1>
           <Line options={options} data={data} />
-          {/* <Button variant="contained" disabled> */}
-
-          <Button variant="contained" to="/">
+          <Button variant="contained" onClick={handleOpen}>
             入力する
           </Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <WeightEdit onClickSave={handleClose} />
+            </Box>
+          </Modal>
         </Box>
       </DefaultLayout>
     </>
