@@ -2,6 +2,7 @@ import React from 'react';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import WeightEdit from '../../components/WeightEdit';
 import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import Link from 'next/link';
 import {
   Chart as ChartJS,
@@ -152,26 +153,32 @@ const Graph = () => {
   return (
     <>
       <DefaultLayout style={{}}>
-        <Box textAlign="center">
-          <h1>
-            体重管理
-            <MonitorWeightIcon fontSize="middle" />
-          </h1>
-          <Line options={options} data={data} />
-          <Button variant="contained" onClick={handleOpen}>
-            入力する
-          </Button>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={style}>
-              <WeightEdit onClickSave={handleClose} />
-            </Box>
-          </Modal>
-        </Box>
+        <Container maxWidth="md">
+          <Box textAlign="center" sx={{ marginBottom: 10 }}>
+            <h1>
+              体重管理
+              <MonitorWeightIcon fontSize="middle" />
+            </h1>
+            <Line options={options} data={data} />
+            <Button
+              variant="contained"
+              onClick={handleOpen}
+              sx={{ marginTop: 6 }}
+            >
+              入力する
+            </Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <WeightEdit onClickSave={handleClose} />
+              </Box>
+            </Modal>
+          </Box>
+        </Container>
       </DefaultLayout>
     </>
   );

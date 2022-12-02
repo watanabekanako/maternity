@@ -102,7 +102,7 @@ const Login = () => {
             label="Email"
             variant="outlined"
             margin="dense"
-            sx={{ width: 600 }}
+            sx={{ width: 600, marginTop: 4 }}
             value={formValues.mailAddress}
             onChange={(e) => {
               setFormValues({
@@ -113,7 +113,7 @@ const Login = () => {
           />
         </div>
         <div>
-          <FormControl sx={{ width: 600, margin: 6 }}>
+          <FormControl sx={{ width: 600, margin: 10 }}>
             <InputLabel htmlFor="outlined-adornment-password">
               Password
             </InputLabel>

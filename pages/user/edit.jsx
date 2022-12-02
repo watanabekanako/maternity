@@ -90,7 +90,7 @@ const Edit = () => {
               variant="outlined"
               margin="dense"
               name="username"
-              sx={{ width: 600, marginBottom: 5 }}
+              sx={{ width: 600, marginBottom: 10 }}
               // value={values?.username}
               value={formValues?.username}
               onChange={(e) => {
@@ -104,7 +104,7 @@ const Edit = () => {
           </div>
           <div>
             <DatePicker
-              sx={{ width: 600, marginBottom: 5 }}
+              sx={{ width: 600, marginBottom: 10 }}
               label="出産予定日"
               error={formErrors.birthDate}
               helperText={formErrors.birthDate}

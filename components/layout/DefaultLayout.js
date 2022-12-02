@@ -226,6 +226,7 @@ function DefaultLayout({ children, style }) {
       <Container maxWidth="lg" sx={{ marginBottom: '100' }}>
         {children}
       </Container>
+      <Box sx={{ backgroundColor: 'pink' }}>ssssss</Box>
     </React.Fragment>
   );
 }

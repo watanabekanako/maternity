@@ -4,6 +4,7 @@ import {
   useDocumentData,
 } from 'react-firebase-hooks/firestore';
 import { db } from '../../firebase';
+import Container from '@mui/material/Container';
 import {
   doc,
   collection,
@@ -43,44 +44,52 @@ export default function Question() {
   }
   return (
     <DefaultLayout>
-      <Box textAlign="center">
-        <Paper sx={{ margin: 4 }}>
-          <Typography
-            className="ttlUnder"
-            sx={{
-              margin: 4,
-              color: '#705040',
-              fontSize: 30,
-            }}
-          >
-            Q,{values.query}
-          </Typography>
-        </Paper>
-        {/* values.xxxはfirestoreで登録したフィールド */}
-        {/* {values.test} */}
-        <Paper
+      <Container maxWidth="md">
+        <Box
+          textAlign="center"
           sx={{
-            padding: 6,
-            margin: 4,
-            color: '#705040',
-            textAlign: 'left',
+            marginTop: 10,
+            // width: '75%',
           }}
         >
-          <Typography className="textQuestion" variant="p">
-            A.
-            <div
-              dangerouslySetInnerHTML={{ __html: values.answer }}
-            />
-          </Typography>
-        </Paper>
-      </Box>
-      <Box textAlign="center" marginBottom={20}>
-        <Link href="/question" passHref>
-          <Button variant="contained" to="/">
-            質問一覧へ戻る
-          </Button>
-        </Link>
-      </Box>
+          <Paper sx={{ margin: 2 }}>
+            <Typography
+              className="ttlUnder"
+              sx={{
+                margin: 2,
+                color: '#705040',
+                fontSize: 20,
+              }}
+            >
+              Q,{values.query}
+            </Typography>
+          </Paper>
+          {/* values.xxxはfirestoreで登録したフィールド */}
+          {/* {values.test} */}
+          <Paper
+            sx={{
+              padding: 6,
+              margin: 2,
+              color: '#705040',
+              textAlign: 'left',
+            }}
+          >
+            <Typography className="textQuestion" variant="p">
+              A.
+              <div
+                dangerouslySetInnerHTML={{ __html: values.answer }}
+              />
+            </Typography>
+          </Paper>
+        </Box>
+        <Box textAlign="center" marginBottom={20}>
+          <Link href="/question" passHref>
+            <Button variant="contained" to="/">
+              質問一覧へ戻る
+            </Button>
+          </Link>
+        </Box>
+      </Container>
     </DefaultLayout>
   );
 }

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import DefaultLayout from '../../components/layout/DefaultLayout';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import { Button } from '@mui/material';
 import LiveHelpIcon from '@mui/icons-material/LiveHelp';
 export default function Page() {
@@ -15,8 +16,10 @@ export default function Page() {
             <LiveHelpIcon fontSize="large" />
           </h1>
         </Box>
-        <QuestionList />
-        <Box textAlign="center"></Box>
+        <Container maxWidth="md">
+          <QuestionList />
+          <Box textAlign="center"></Box>
+        </Container>
       </DefaultLayout>
     </>
   );

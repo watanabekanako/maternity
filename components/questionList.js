@@ -8,6 +8,7 @@ import {
 } from 'react-firebase-hooks/firestore';
 import { db, withIDConverter } from '../firebase';
 import Stack from '@mui/material/Stack';
+
 import {
   doc,
   collection,
@@ -16,7 +17,7 @@ import {
   where,
   documentId,
 } from 'firebase/firestore';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 function QuestionList() {
   // const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -56,7 +57,12 @@ function QuestionList() {
                 <div key={index}>
                   <Link href={`question/${question.id}`}>
                     <a>
-                      <div>{question.query}</div>
+                      <Typography
+                        variant="p"
+                        sx={{ color: '#705040' }}
+                      >
+                        Q.{question.query}
+                      </Typography>
                     </a>
                   </Link>
                 </div>

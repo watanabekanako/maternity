@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import Link from 'next/link';
+import { Typography } from '@mui/material';
 // import Answer from './question/Answer';
 function ResponsiveAppBar() {
   const Item = styled(Paper)(({ theme }) => ({
@@ -73,7 +74,13 @@ function ResponsiveAppBar() {
                       </Button>
                     </Link>
                   ) : (
-                    <Button variant="contained" to="/">
+                    <Button
+                      sx={{
+                        backgroundColor: '#d4dfbb',
+                      }}
+                      variant="contained"
+                      to="/"
+                    >
                       会員登録すると見れます
                     </Button>
                   )}

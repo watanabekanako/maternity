@@ -89,7 +89,7 @@ const MyApp = () => {
                     {editing ? (
                       <TextField
                         value={diary}
-                        placeholder={'まだ登録されていません。'}
+                        placeholder={'ss登録されていません。'}
                         onChange={(e) => {
                           setDiary(e.target.value);
                         }}
@@ -103,6 +103,7 @@ const MyApp = () => {
                       </Box>
                     )}
                     <Box
+                      sx={{ marginBottom: 6 }}
                       value={diary}
                       placeholder={'まだ登録されていません。'}
                       onChange={(e) => {
@@ -111,7 +112,7 @@ const MyApp = () => {
                     />
                     {editing ? (
                       <Button
-                        sx={{ marginTop: '4' }}
+                        variant="contained"
                         onClick={() => {
                           setEditing(false);
                           setDoc(
@@ -137,6 +138,7 @@ const MyApp = () => {
                       </Button>
                     ) : (
                       <Button
+                        variant="contained"
                         onClick={() => {
                           setEditing(true);
                         }}
@@ -148,7 +150,9 @@ const MyApp = () => {
                 )}
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>閉じる</Button>
+                <Button variant="contained" onClick={handleClose}>
+                  閉じる
+                </Button>
               </DialogActions>
             </Dialog>
           </div>
