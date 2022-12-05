@@ -60,6 +60,7 @@ const MyApp = () => {
       <DefaultLayout>
         <Box textAlign="center">
           <h1>日記カレンダー</h1>
+          <p>日々の体調や出来事を記録しておきましょう！</p>
           <div className="diaryCalender">
             <Box
               sx={{
@@ -70,7 +71,7 @@ const MyApp = () => {
             >
               <Calendar
                 maxWidth={false}
-                sx={{ width: '600' }}
+                className={'custom'}
                 onClickDay={(value, event) => {
                   setSelectedValue(value);
                 }}
@@ -78,7 +79,7 @@ const MyApp = () => {
             </Box>
 
             <Dialog onClose={handleClose} open={selectedValue}>
-              <DialogTitle>
+              <DialogTitle sx={{ color: '#705040' }}>
                 日付:{moment(selectedValue)?.format('YYYY/MM/DD')}
               </DialogTitle>
               <DialogContent>
@@ -89,7 +90,7 @@ const MyApp = () => {
                     {editing ? (
                       <TextField
                         value={diary}
-                        placeholder={'ss登録されていません。'}
+                        placeholder={'登録されていません。'}
                         onChange={(e) => {
                           setDiary(e.target.value);
                         }}

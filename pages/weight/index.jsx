@@ -3,7 +3,6 @@ import DefaultLayout from '../../components/layout/DefaultLayout';
 import WeightEdit from '../../components/WeightEdit';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import Link from 'next/link';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -159,6 +158,7 @@ const Graph = () => {
               体重管理
               <MonitorWeightIcon fontSize="middle" />
             </h1>
+            <p>日々の体重を記録しておきましょう！</p>
             <Line options={options} data={data} />
             <Button
               variant="contained"
