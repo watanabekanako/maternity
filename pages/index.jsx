@@ -36,7 +36,7 @@ function ResponsiveAppBar() {
                 <Item>
                   <h2 className="ttlUnder">出産予定日ガイド</h2>
                   <Image
-                    src="/img/diary.png"
+                    src="/img/calender.png"
                     width={500}
                     height={500}
                   />
@@ -74,13 +74,7 @@ function ResponsiveAppBar() {
                       </Button>
                     </Link>
                   ) : (
-                    <Button
-                      sx={{
-                        backgroundColor: '#d4dfbb',
-                      }}
-                      variant="contained"
-                      to="/"
-                    >
+                    <Button variant="contained" to="/">
                       会員登録すると見れます
                     </Button>
                   )}
@@ -114,7 +108,7 @@ function ResponsiveAppBar() {
                 <Item>
                   <h2 className="ttlUnder">よくある質問</h2>
                   <Image
-                    src="/img/diary.png"
+                    src="/img/question.png"
                     width={500}
                     height={500}
                   />

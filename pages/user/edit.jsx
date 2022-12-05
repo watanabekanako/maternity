@@ -5,15 +5,16 @@ import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../../firebase';
-import { useRouter } from 'next/router';
 import { doc, setDoc } from 'firebase/firestore';
 import moment from 'moment';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { DatePicker } from '@mui/x-date-pickers';
 import { Box } from '@mui/material';
+import { useRouter } from 'next/router';
+
 const Edit = () => {
   const [user, loadingUser, errorUser] = useAuthState(auth);
-
+  const router = useRouter();
   const initialValues = {
     birthDate: '',
     username: '',
@@ -49,6 +50,7 @@ const Edit = () => {
     } else {
       // authentication
       if (user) {
+        router.push('/baby');
         // firestoreにユーザーのデータを保存
         await setDoc(
           doc(db, 'user', user.uid),
