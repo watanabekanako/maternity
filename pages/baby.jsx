@@ -51,6 +51,7 @@ const Baby = () => {
   const m2 = moment();
 
   const diffDays = m1.diff(m2, 'days');
+  const diffWeeks = m1.diff(m2, 'weeks');
   const diffMonths = m1.diff(m2, 'month');
 
   const [
@@ -94,7 +95,8 @@ const Baby = () => {
             </Typography>
             日
           </h2>
-
+          {/* 妊娠週数 */}
+          {/* <h3>{diffWeeks}</h3> */}
           {/* <Typography
             variant="h4"
             sx={{
