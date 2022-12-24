@@ -81,12 +81,13 @@ const Baby = () => {
           <Box>
             <Image src="/img/baby.png" width={500} height={500} />
           </Box>
-          <h2>
+          <div>
             <Typography variant="h4" sx={{ color: '#705040' }}>
               出産予定日まで
             </Typography>
             あと
             <Typography
+              className="countDays"
               variant="h2"
               sx={{ color: '#E4AF9B' }}
               component={'span'}
@@ -94,7 +95,7 @@ const Baby = () => {
               {diffDays}
             </Typography>
             日
-          </h2>
+          </div>
           {/* 妊娠週数 */}
           {/* <h3>{diffWeeks}</h3> */}
           {/* <Typography

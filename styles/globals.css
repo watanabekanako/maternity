@@ -24,6 +24,10 @@ h1 {
   border-bottom: dashed 4px #e4af9b;
   display: inline-block;
 }
+
+.countDays {
+  font-size: 3.75rem;
+}
 .ttlUnder {
   position: relative;
   padding: 0.3em;
