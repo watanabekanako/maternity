@@ -147,6 +147,27 @@ const Graph = () => {
         spanGaps: true,
       },
     ],
+    options: {
+      responsive: false,
+    },
+    scales: {
+      yAxes: [
+        // Ｙ軸の設定
+        {
+          ticks: {
+            min: 0, // 軸の最小値
+            max: 25, // 軸の最大値
+            stepSize: 5, // 目盛り・補助線の間隔
+          },
+          scaleLabel: {
+            // ラベルの表示
+            display: true,
+            fontSize: 16,
+            labelString: '系列Ａ（件数）',
+          },
+        },
+      ],
+    },
   };
 
   return (
@@ -158,7 +179,7 @@ const Graph = () => {
               体重管理
               <MonitorWeightIcon fontSize="middle" />
             </h1>
-            <p>日々の体重を記録しておきましょう！</p>
+            <p>今月の体重を記録しておきましょう！</p>
             <Line options={options} data={data} />
             <Button
               variant="contained"

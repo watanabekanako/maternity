@@ -75,11 +75,14 @@ const MyApp = () => {
                 onClickDay={(value, event) => {
                   setSelectedValue(value);
                 }}
+                // {values ?(console.log("de-taあります")):(console.log("データないです"))}
               />
             </Box>
 
             <Dialog onClose={handleClose} open={selectedValue}>
-              <DialogTitle sx={{ color: '#705040' }}>
+              <DialogTitle
+                sx={{ color: '#705040', textAlign: 'center' }}
+              >
                 日付:{moment(selectedValue)?.format('YYYY/MM/DD')}
               </DialogTitle>
               <DialogContent>
