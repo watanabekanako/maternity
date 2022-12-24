@@ -18,7 +18,7 @@ const DiaryCalenderModal = ({ open, onClose, description }) => {
     aria-describedby="modal-modal-description"
   >
     {/* <Box sx={modalInnerBoxStyle}> */}
-    <Box textAlign="center">
+    <Box textAlign="center" sx={{ p: '32px' }}>
       <p>{description}</p>
       <Stack spacing={2}>
         <DatePicker

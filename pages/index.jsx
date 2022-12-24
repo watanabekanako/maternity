@@ -29,10 +29,12 @@ function ResponsiveAppBar() {
         <React.Fragment>
           <Box textAlign="center">
             <h1>「mama＋」</h1>
-            <p>妊婦さんのための便利な機能が揃っています</p>
+            <Typography sx={{ my: 4 }}>
+              妊婦さんのための便利な機能が揃っています
+            </Typography>
             <p></p>
             <Grid container spacing={4}>
-              <Grid item xs={3}>
+              <Grid item md={3} sm={12} sx={{ display: 'block' }}>
                 <Item>
                   <h2 className="ttlUnder">出産予定日ガイド</h2>
                   <Image
@@ -45,18 +47,30 @@ function ResponsiveAppBar() {
                   </p>
                   {user ? (
                     <Link href="baby" passHref>
-                      <Button variant="contained" to="/">
+                      <Button
+                        variant="contained"
+                        to="/"
+                        sx={{ py: 1 }}
+                      >
                         確認する
                       </Button>
                     </Link>
                   ) : (
-                    <Button variant="contained" to="/">
+                    <Box
+                      sx={{
+                        color: '#fff',
+                        backgroundColor: '#705040',
+                        borderRadius: 2,
+                        p: 2,
+                        display: 'inline-block',
+                      }}
+                    >
                       会員登録すると見れます
-                    </Button>
+                    </Box>
                   )}
                 </Item>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} sm={12}>
                 <Item>
                   <h2 className="ttlUnder">体重管理ガイド</h2>
                   <Image
@@ -69,18 +83,30 @@ function ResponsiveAppBar() {
                   </p>
                   {user ? (
                     <Link href="weight" passHref>
-                      <Button variant="contained" to="/">
+                      <Button
+                        variant="contained"
+                        to="/"
+                        sx={{ py: 1 }}
+                      >
                         確認する
                       </Button>
                     </Link>
                   ) : (
-                    <Button variant="contained" to="/">
+                    <Box
+                      sx={{
+                        color: '#fff',
+                        backgroundColor: '#705040',
+                        borderRadius: 2,
+                        p: 2,
+                        display: 'inline-block',
+                      }}
+                    >
                       会員登録すると見れます
-                    </Button>
+                    </Box>
                   )}
                 </Item>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} sm={12}>
                 <Item>
                   <h2 className="ttlUnder">日記の記録</h2>
                   <Image
@@ -93,18 +119,30 @@ function ResponsiveAppBar() {
                   </p>
                   {user ? (
                     <Link href="diaryCalender" passHref>
-                      <Button variant="contained" to="/">
+                      <Button
+                        variant="contained"
+                        to="/"
+                        sx={{ py: 1 }}
+                      >
                         確認する
                       </Button>
                     </Link>
                   ) : (
-                    <Button variant="contained" to="/">
+                    <Box
+                      sx={{
+                        color: '#fff',
+                        backgroundColor: '#705040',
+                        borderRadius: 2,
+                        p: 2,
+                        display: 'inline-block',
+                      }}
+                    >
                       会員登録すると見れます
-                    </Button>
+                    </Box>
                   )}
                 </Item>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item md={3} sm={12}>
                 <Item>
                   <h2 className="ttlUnder">よくある質問</h2>
                   <Image
@@ -116,7 +154,7 @@ function ResponsiveAppBar() {
                     妊婦さんがよく疑問に感じることを、まとめているため、気になった時に確認することができます。
                   </p>
                   <Link href="/question" passHref>
-                    <Button variant="contained" to="/">
+                    <Button variant="contained" to="/" sx={{ py: 1 }}>
                       こちらから
                     </Button>
                   </Link>
@@ -125,7 +163,11 @@ function ResponsiveAppBar() {
             </Grid>
             {!user && (
               <Link href="/register" passHref>
-                <Button variant="contained" to="/" sx={{ margin: 8 }}>
+                <Button
+                  variant="contained"
+                  to="/"
+                  sx={{ margin: 8, py: 2 }}
+                >
                   新規会員登録はこちらから
                 </Button>
               </Link>

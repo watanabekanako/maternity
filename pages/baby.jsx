@@ -128,7 +128,7 @@ const Baby = () => {
             <Typography
               className="ttlUnder"
               variant="display: inline-block;"
-              sx={{ color: '#705040', fontSize: 30 }}
+              sx={{ color: '#705040', fontSize: '1.7rem' }}
             >
               今月のママへのメッセージ
             </Typography>

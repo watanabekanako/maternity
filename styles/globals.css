@@ -19,7 +19,8 @@ a {
   box-sizing: border-box;
 }
 
-h1 {
+h1,
+.ttlDashed {
   /*線の種類（点線）2px 線色*/
   border-bottom: dashed 4px #e4af9b;
   display: inline-block;
@@ -89,4 +90,10 @@ h1 {
   justify-content: center;
   display: flex;
   padding-top: 10px;
+}
+
+/* カレンダダイアログ調整 */
+.css-15we3aj-MuiPaper-root-MuiDialog-paper {
+  padding: 32px;
+  border-radius: 2px;
 }
