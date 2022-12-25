@@ -23,7 +23,7 @@ import {
   documentId,
 } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Box } from '@mui/system';
+import Box from '@mui/material';
 
 import { Grid, Stack, Typography } from '@mui/material';
 import { Boy } from '@mui/icons-material';
