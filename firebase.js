@@ -26,10 +26,10 @@ export const auth = getAuth(app);
 
 // DEV
 // クライアント側でのみエミュレータに接続する(サーバーサイドでも実行するとエラーになったため)
-if (typeof window !== 'undefined') {
-  connectFirestoreEmulator(db, 'localhost', 8080);
-  connectAuthEmulator(auth, 'http://localhost:9099');
-}
+// if (typeof window !== 'undefined') {
+//   connectFirestoreEmulator(db, 'localhost', 8080);
+//   connectAuthEmulator(auth, "http://localhost:9099");
+// }
 
 // firestoreからID込みでデータを取得するためのconverter
 export const withIDConverter = {
