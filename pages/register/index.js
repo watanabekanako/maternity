@@ -50,7 +50,7 @@ const Register = () => {
       }).then(() => {
         // 登録成功時の処理
         // 登録が終わったらログイン画面に遷移する
-        router.push('login');
+        router.push('/login');
       });
     }
   }, [user]);
