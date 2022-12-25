@@ -47,14 +47,14 @@ function QuestionList() {
       {values?.map((question, index) => {
         // console.log(values);
         return (
-          <>
+          <React.Fragment key={index}>
             <Paper elevation={3} sx={{ padding: 2, margin: 4 }}>
               <Stack
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <div key={index}>
+                <div>
                   <Link href={`question/${question.id}`}>
                     <a>
                       <Typography
@@ -69,7 +69,7 @@ function QuestionList() {
                 <ArrowForwardIosIcon />
               </Stack>
             </Paper>
-          </>
+          </React.Fragment>
         );
       })}
     </ul>
