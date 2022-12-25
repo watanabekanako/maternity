@@ -3,10 +3,7 @@ import {
   getFirestore,
   connectFirestoreEmulator,
 } from 'firebase/firestore';
-import {
-  getAuth,
-  connectAuthEmulator,
-} from "firebase/auth";
+import { getAuth, connectAuthEmulator } from 'firebase/auth';
 
 // firebaseから取得したconfigを設定
 // env.tsに外出しするとなおよしですが、NEXT_PUBLIC_を頭に付ける必要がありそう
@@ -29,21 +26,21 @@ export const auth = getAuth(app);
 
 // DEV
 // クライアント側でのみエミュレータに接続する(サーバーサイドでも実行するとエラーになったため)
-if (typeof window !== 'undefined') {
-  connectFirestoreEmulator(db, 'localhost', 8080);
-  connectAuthEmulator(auth, "http://localhost:9099");
-}
+// if (typeof window !== 'undefined') {
+//   connectFirestoreEmulator(db, 'localhost', 8080);
+//   connectAuthEmulator(auth, "http://localhost:9099");
+// }
 
 // firestoreからID込みでデータを取得するためのconverter
 export const withIDConverter = {
   toFirestore(data) {
-    return data
+    return data;
   },
   fromFirestore(snapshot, options) {
     const data = snapshot.data(options);
     return {
       ...data,
       id: snapshot.id,
-    }
-  }
+    };
+  },
 };
