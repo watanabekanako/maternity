@@ -1,13 +1,8 @@
 import * as React from 'react';
-import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-} from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
-import createEmotionCache from '../createEmotionCache';
 import theme from '../theme';
+import createEmotionCache from '../createEmotionCache';
 
 export default class MyDocument extends Document {
   render() {
@@ -22,10 +17,12 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
+          <meta name="emotion-insertion-point" content="" />
+          {this.props.emotionStyleTags}
         </Head>
         <body>
-          <Main />
-          <NextScript />
+        <Main />
+        <NextScript />
         </body>
       </Html>
     );
@@ -39,8 +36,10 @@ MyDocument.getInitialProps = async (ctx) => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App) => (props) =>
-        <App emotionCache={cache} {...props} />,
+      enhanceApp: (App) =>
+        function EnhanceApp(props) {
+          return <App emotionCache={cache} {...props} />;
+        },
     });
 
   const initialProps = await Document.getInitialProps(ctx);
@@ -55,9 +54,6 @@ MyDocument.getInitialProps = async (ctx) => {
 
   return {
     ...initialProps,
-    styles: [
-      ...React.Children.toArray(initialProps.styles),
-      ...emotionStyleTags,
-    ],
+    emotionStyleTags,
   };
 };
