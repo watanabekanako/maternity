@@ -9,7 +9,6 @@ import {
   LinearScale,
   PointElement,
   LineElement,
-  Title,
   Tooltip,
   Legend,
 } from 'chart.js';
@@ -34,7 +33,6 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
-  Title,
   Tooltip,
   Legend
 );
@@ -61,12 +59,7 @@ const Graph = () => {
 
   const options = {
     responsive: true,
-    plugins: {
-      // title: {
-      //   display: true,
-      //   text: '妊娠中の体重管理',
-      // },
-    },
+    plugins: {},
   };
 
   // const q = query(
@@ -149,24 +142,6 @@ const Graph = () => {
     ],
     options: {
       responsive: false,
-    },
-    scales: {
-      yAxes: [
-        // Ｙ軸の設定
-        {
-          ticks: {
-            min: 0, // 軸の最小値
-            max: 25, // 軸の最大値
-            stepSize: 5, // 目盛り・補助線の間隔
-          },
-          scaleLabel: {
-            // ラベルの表示
-            display: true,
-            fontSize: 16,
-            labelString: '系列Ａ（件数）',
-          },
-        },
-      ],
     },
   };
 
