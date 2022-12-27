@@ -3,7 +3,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 // import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import moment from 'moment';
-import useSWR from 'swr';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@mui/material/Button';
