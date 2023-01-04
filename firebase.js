@@ -3,8 +3,8 @@ import {
   getFirestore,
   connectFirestoreEmulator,
 } from 'firebase/firestore';
-import { getAuth, connectAuthEmulator } from 'firebase/auth';
-
+import { connectAuthEmulator } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 // firebaseから取得したconfigを設定
 // env.tsに外出しするとなおよしですが、NEXT_PUBLIC_を頭に付ける必要がありそう
 // ref: https://www.azukipan.com/posts/firebase-project-config-setting/

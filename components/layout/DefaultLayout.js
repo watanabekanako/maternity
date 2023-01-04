@@ -79,7 +79,7 @@ function DefaultLayout({ children, style }) {
                 variant="h6"
                 noWrap
                 component="a"
-                href="/"
+                href="/top"
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },

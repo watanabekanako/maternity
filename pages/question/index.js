@@ -10,18 +10,9 @@ export default function Page() {
   return (
     <>
       <DefaultLayout>
-        <Box sx={{ textAlign: 'center' }} className="ttlDashed ">
-          <Box
-            sx={{
-              display: 'inline-flex',
-              justifyContent: 'center',
-            }}
-          >
-            <Typography sx={{ fontSize: '2em', fontWeight: 'bold' }}>
-              よくある質問
-            </Typography>
-            <LiveHelpIcon />
-          </Box>
+        <Box textAlign="center">
+          <h1>よくある質問</h1>
+          <LiveHelpIcon />
         </Box>
         <Container maxWidth="md">
           <QuestionList />
