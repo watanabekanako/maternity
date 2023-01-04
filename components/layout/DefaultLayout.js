@@ -28,14 +28,14 @@ function DefaultLayout({ children, style }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const pages = user
     ? [
-        { label: 'Top', href: '/top' },
+        { label: 'Top', href: '/' },
         { label: 'Baby', href: '/baby' },
         { label: 'Diary', href: '/diaryCalender' },
         { label: 'Weight', href: '/weight' },
         { label: 'Q&A', href: '/question' },
       ]
     : [
-        { label: 'Top', href: '/top' },
+        { label: 'Top', href: '/' },
         { label: 'Q&A', href: '/question' },
         { label: 'Login', href: '/login' },
         { label: '新規会員登録', href: '/register' },
@@ -79,7 +79,7 @@ function DefaultLayout({ children, style }) {
                 variant="h6"
                 noWrap
                 component="a"
-                href="/top"
+                href="/"
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },

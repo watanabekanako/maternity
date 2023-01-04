@@ -33,7 +33,7 @@ const NeedLogin = ({ children }) => {
     router.pathname !== '/login' &&
     router.pathname !== '/register' &&
     !router.pathname.startsWith('/question') &&
-    !router.pathname.startsWith('/top')
+    router.pathname !== '/'
   ) {
     router.push('/login');
   }
