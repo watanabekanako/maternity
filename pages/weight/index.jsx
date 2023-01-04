@@ -91,10 +91,8 @@ const Graph = () => {
   const [selectedMonth, setSelectedMonth] = React.useState(
     moment().startOf('month')
   );
-  // 2022/10/1
-  const first = selectedMonth.startOf('month');
-  // 2022/10/31
-  const end = selectedMonth.endOf('month');
+  const first = moment(selectedMonth).startOf('month');
+  const end = moment(selectedMonth).endOf('month');
   // 上記の差 = 30
   const diff = end.diff(first, 'days');
   // ログインしているユーザーの商法の取得
