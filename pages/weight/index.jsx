@@ -88,11 +88,13 @@ const Graph = () => {
   // });
 
   // react-firebase-hooksの処理
-
+  const [selectedMonth, setSelectedMonth] = React.useState(
+    moment().startOf('month')
+  );
   // 2022/10/1
-  const first = moment().startOf('month');
+  const first = selectedMonth.startOf('month');
   // 2022/10/31
-  const end = moment().endOf('month');
+  const end = selectedMonth.endOf('month');
   // 上記の差 = 30
   const diff = end.diff(first, 'days');
   // ログインしているユーザーの商法の取得
@@ -107,7 +109,9 @@ const Graph = () => {
       orderBy(documentId(), 'asc')
     ).withConverter(withIDConverter)
   );
-  console.log(values);
+
+  console.log('first', first);
+  // console.log('end', end);
 
   if (loading) {
     return <>Loading...</>;
@@ -180,6 +184,24 @@ const Graph = () => {
               <MonitorWeightIcon fontSize="middle" />
             </h1>
             <p>今月の体重を記録しておきましょう！</p>
+            <Button
+              onClick={() => {
+                setSelectedMonth(
+                  moment(selectedMonth.subtract(1, 'month'))
+                );
+              }}
+            >
+              前の月へ
+            </Button>
+            <Button
+              onClick={() => {
+                setSelectedMonth(
+                  moment(selectedMonth.add(1, 'month'))
+                );
+              }}
+            >
+              次の月へ
+            </Button>
             <Line options={options} data={data} />
             <Button
               variant="contained"
