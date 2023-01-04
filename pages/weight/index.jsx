@@ -183,6 +183,8 @@ const Graph = () => {
             </h1>
             <p>今月の体重を記録しておきましょう！</p>
             <Button
+              sx={{ m: 2 }}
+              variant="contained"
               onClick={() => {
                 setSelectedMonth(
                   moment(selectedMonth.subtract(1, 'month'))
@@ -192,6 +194,8 @@ const Graph = () => {
               前の月へ
             </Button>
             <Button
+              variant="contained"
+              sx={{ mx: 2 }}
               onClick={() => {
                 setSelectedMonth(
                   moment(selectedMonth.add(1, 'month'))
