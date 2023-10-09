@@ -12,3 +12,5 @@
 
 
 https://www.figma.com/file/YG65KdWUutoq2ZQO8JuwDg/%E5%80%8B%E4%BA%BA%E3%82%A2%E3%83%97%E3%83%AA?type=design&node-id=0%3A1&mode=dev
+
+https://www.figma.com/file/YG65KdWUutoq2ZQO8JuwDg/%E5%80%8B%E4%BA%BA%E3%82%A2%E3%83%97%E3%83%AA?type=design&node-id=0%3A1&mode=dev
